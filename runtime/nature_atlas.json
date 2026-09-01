@@ -2,7 +2,7 @@
   "catalog_version": 1,
   "atlas": "nature_atlas.png",
   "atlas_width": 488,
-  "atlas_height": 408,
+  "atlas_height": 522,
   "padding": 2,
   "packing": "name_sorted_shelf_v1",
   "includes_review": false,
@@ -121,10 +121,126 @@
       "catalog_version": 1
     },
     {
-      "name": "nature_tennis_ball_01",
+      "name": "nature_snorkel_fins_01",
       "type": "object",
       "x": 132,
       "y": 164,
+      "width": 128,
+      "height": 96,
+      "slots": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "anchor": [
+        64,
+        96
+      ],
+      "placement_offset": {
+        "x": 1,
+        "y": 5
+      },
+      "ground_contact": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "status": "PASS",
+      "review_reasons": [],
+      "sprite_sha256": "2f36579d674e32beb3c94d2d38eca832981642ceaa2b37f45aa30d59513d4853",
+      "catalog_version": 1
+    },
+    {
+      "name": "nature_snorkel_mask_01",
+      "type": "object",
+      "x": 262,
+      "y": 164,
+      "width": 128,
+      "height": 96,
+      "slots": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "anchor": [
+        64,
+        96
+      ],
+      "placement_offset": {
+        "x": 0,
+        "y": 5
+      },
+      "ground_contact": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "status": "PASS",
+      "review_reasons": [],
+      "sprite_sha256": "e3364fdd9bbdb01c726734c89c2d9df8a369fd98385d9d04e6ec5bb4a8e45e1a",
+      "catalog_version": 1
+    },
+    {
+      "name": "nature_snowboard_01",
+      "type": "object",
+      "x": 2,
+      "y": 262,
+      "width": 160,
+      "height": 112,
+      "slots": {
+        "x": 1,
+        "y": 2,
+        "z": 1
+      },
+      "anchor": [
+        80,
+        112
+      ],
+      "placement_offset": {
+        "x": 5,
+        "y": 14
+      },
+      "ground_contact": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "status": "PASS",
+      "review_reasons": [],
+      "sprite_sha256": "2dba03bdbbbdae054f16067ac259c4b42309a8bf15a878049ed88567d72662d4",
+      "catalog_version": 1
+    },
+    {
+      "name": "nature_surfboard_01",
+      "type": "object",
+      "x": 164,
+      "y": 262,
+      "width": 160,
+      "height": 112,
+      "slots": {
+        "x": 1,
+        "y": 2,
+        "z": 1
+      },
+      "anchor": [
+        80,
+        112
+      ],
+      "placement_offset": {
+        "x": 5,
+        "y": 11
+      },
+      "ground_contact": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "status": "PASS",
+      "review_reasons": [],
+      "sprite_sha256": "bc54823d8acfc943c534e015380c91563606c85121bd0831e84c0945dce91df0",
+      "catalog_version": 1
+    },
+    {
+      "name": "nature_tennis_ball_01",
+      "type": "object",
+      "x": 326,
+      "y": 262,
       "width": 128,
       "height": 96,
       "slots": {
@@ -152,8 +268,8 @@
     {
       "name": "nature_tennis_racket_01",
       "type": "object",
-      "x": 262,
-      "y": 164,
+      "x": 2,
+      "y": 376,
       "width": 128,
       "height": 96,
       "slots": {
@@ -181,8 +297,8 @@
     {
       "name": "nature_treadmill_02",
       "type": "object",
-      "x": 2,
-      "y": 262,
+      "x": 132,
+      "y": 376,
       "width": 160,
       "height": 144,
       "slots": {
@@ -205,5 +321,5 @@
       "catalog_version": 1
     }
   ],
-  "atlas_sha256": "1f0d987e45f86fe1f6a7ef0e62cc388cd4c189eab37b7cf0a6718a0e88843817"
+  "atlas_sha256": "c2b1f069a9607620989047f7c232fcdc6afe3a3acf38415942d1505cea540db2"
 }
