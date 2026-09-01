@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "slots": [1, 1, 1],
+  "object_scale": 0.8,
+  "ground_contact": {"x": 0.5, "y": 0.84}
+}

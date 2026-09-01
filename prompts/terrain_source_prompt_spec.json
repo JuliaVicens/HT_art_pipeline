@@ -1,0 +1,32 @@
+{
+  "schema_version": 2,
+  "target_surface": { "width": 64, "depth": 32 },
+  "composition": {
+    "pattern_centered": true,
+    "quadrant_density_tolerance": 0.15,
+    "neutral_edge_fraction": 0.10,
+    "max_secondary_region_fraction": 0.35,
+    "typical_feature_fraction": [0.10, 0.25],
+    "final_feature_width_pixels": [6, 16],
+    "allow_microtexture": false,
+    "minimum_readable_line_pixels": 2
+  },
+  "lighting": {
+    "uniform_diffuse": true,
+    "allow_global_gradient": false,
+    "allow_vignette": false,
+    "allow_cast_shadow": false,
+    "allow_single_hotspot": false
+  },
+  "path": {
+    "centered": true,
+    "width_fraction": 0.18,
+    "constant_width": true,
+    "edge_centered_endpoints": true
+  },
+  "water": {
+    "minimum_ripple_length_pixels": 6,
+    "minimum_ripple_thickness_pixels": 2,
+    "allow_sparkle_noise": false
+  }
+}

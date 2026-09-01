@@ -1,0 +1,204 @@
+{
+  "catalog_version": 1,
+  "atlas": "nature_atlas_review.png",
+  "atlas_width": 490,
+  "atlas_height": 310,
+  "padding": 2,
+  "packing": "name_sorted_shelf_v1",
+  "includes_review": true,
+  "assets": [
+    {
+      "name": "nature_bench_01",
+      "type": "object",
+      "x": 2,
+      "y": 2,
+      "width": 160,
+      "height": 112,
+      "slots": {
+        "x": 2,
+        "y": 1,
+        "z": 1
+      },
+      "anchor": [
+        80,
+        112
+      ],
+      "placement_offset": {
+        "x": 0,
+        "y": 20
+      },
+      "ground_contact": null,
+      "status": "REVIEW",
+      "review_reasons": [
+        "geometry_qa"
+      ],
+      "sprite_sha256": "f77554bd7fd054f8a55e8b78da245a7609e66e6e53d994a09073cdaaa1059df1",
+      "catalog_version": 1
+    },
+    {
+      "name": "nature_bench_press_01",
+      "type": "object",
+      "x": 164,
+      "y": 2,
+      "width": 192,
+      "height": 160,
+      "slots": {
+        "x": 2,
+        "y": 2,
+        "z": 2
+      },
+      "anchor": [
+        96,
+        160
+      ],
+      "placement_offset": {
+        "x": 3,
+        "y": 23
+      },
+      "ground_contact": null,
+      "status": "PASS",
+      "review_reasons": [],
+      "sprite_sha256": "d32776fee3a02644ed217eee99fbc1b3fa4fd49bbaa160bfa5108b550c2932b3",
+      "catalog_version": 1
+    },
+    {
+      "name": "nature_dirt_03",
+      "type": "terrain",
+      "x": 358,
+      "y": 2,
+      "width": 64,
+      "height": 40,
+      "slots": null,
+      "anchor": null,
+      "placement_offset": null,
+      "ground_contact": null,
+      "status": "REVIEW",
+      "review_reasons": [
+        "estimated segmentation"
+      ],
+      "sprite_sha256": "35fbd97e7e728d1b15619b617e4896a348c7b296ba6c470e4ea4f7c8bb7cf7b8",
+      "catalog_version": 1
+    },
+    {
+      "name": "nature_grass_03",
+      "type": "terrain",
+      "x": 424,
+      "y": 2,
+      "width": 64,
+      "height": 40,
+      "slots": null,
+      "anchor": null,
+      "placement_offset": null,
+      "ground_contact": null,
+      "status": "REVIEW",
+      "review_reasons": [
+        "estimated segmentation"
+      ],
+      "sprite_sha256": "6e6c4047d96a7e3b816b05243c6dd5dd2dceda3fd1b4ad357a7ee05e0b0d007f",
+      "catalog_version": 1
+    },
+    {
+      "name": "nature_potted_plant_02",
+      "type": "object",
+      "x": 2,
+      "y": 164,
+      "width": 128,
+      "height": 128,
+      "slots": {
+        "x": 1,
+        "y": 1,
+        "z": 2
+      },
+      "anchor": [
+        64,
+        128
+      ],
+      "placement_offset": {
+        "x": 1,
+        "y": 6
+      },
+      "ground_contact": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "status": "PASS",
+      "review_reasons": [],
+      "sprite_sha256": "4b392f1b4929c13a297cd9dd1863518c52b77d342d0a7c8ec0242d548855797a",
+      "catalog_version": 1
+    },
+    {
+      "name": "nature_running_shoes_02",
+      "type": "object",
+      "x": 132,
+      "y": 164,
+      "width": 128,
+      "height": 96,
+      "slots": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "anchor": [
+        64,
+        96
+      ],
+      "placement_offset": {
+        "x": 1,
+        "y": 8
+      },
+      "ground_contact": {
+        "x": 0.5,
+        "y": 0.84
+      },
+      "status": "PASS",
+      "review_reasons": [],
+      "sprite_sha256": "4c2f3d7061264e59ebe0c986ddfe82360739d2702d56768b1c56626a608c0e6a",
+      "catalog_version": 1
+    },
+    {
+      "name": "nature_treadmill_02",
+      "type": "object",
+      "x": 262,
+      "y": 164,
+      "width": 160,
+      "height": 144,
+      "slots": {
+        "x": 2,
+        "y": 1,
+        "z": 2
+      },
+      "anchor": [
+        80,
+        144
+      ],
+      "placement_offset": {
+        "x": -5,
+        "y": 19
+      },
+      "ground_contact": null,
+      "status": "PASS",
+      "review_reasons": [],
+      "sprite_sha256": "166e908fa7791cfba88faffad8eef21fa0c376dc99742c003de7b1ee21cc1055",
+      "catalog_version": 1
+    },
+    {
+      "name": "nature_water_03",
+      "type": "terrain",
+      "x": 424,
+      "y": 164,
+      "width": 64,
+      "height": 32,
+      "slots": null,
+      "anchor": null,
+      "placement_offset": null,
+      "ground_contact": null,
+      "status": "REVIEW",
+      "review_reasons": [
+        "estimated segmentation"
+      ],
+      "sprite_sha256": "ceebb99f90057481dadcd110466c516923a43249c2223b695585cab21b3d973e",
+      "catalog_version": 1
+    }
+  ],
+  "atlas_sha256": "938c379755c771860629e8a8c6800a830f482d0822183dfeec028d963dc48844"
+}

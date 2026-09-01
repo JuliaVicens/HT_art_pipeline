@@ -1,0 +1,122 @@
+{
+  "catalog_version": 1,
+  "atlas": "nature_atlas.png",
+  "atlas_width": 456,
+  "atlas_height": 310,
+  "padding": 2,
+  "packing": "name_sorted_shelf_v1",
+  "includes_review": false,
+  "assets": [
+    {
+      "name": "nature_bench_press_01",
+      "type": "object",
+      "x": 2,
+      "y": 2,
+      "width": 192,
+      "height": 160,
+      "slots": {
+        "x": 2,
+        "y": 2,
+        "z": 2
+      },
+      "anchor": [
+        96,
+        160
+      ],
+      "placement_offset": {
+        "x": 3,
+        "y": 23
+      },
+      "ground_contact": null,
+      "status": "PASS",
+      "review_reasons": [],
+      "sprite_sha256": "d32776fee3a02644ed217eee99fbc1b3fa4fd49bbaa160bfa5108b550c2932b3",
+      "catalog_version": 1
+    },
+    {
+      "name": "nature_potted_plant_02",
+      "type": "object",
+      "x": 196,
+      "y": 2,
+      "width": 128,
+      "height": 128,
+      "slots": {
+        "x": 1,
+        "y": 1,
+        "z": 2
+      },
+      "anchor": [
+        64,
+        128
+      ],
+      "placement_offset": {
+        "x": 1,
+        "y": 6
+      },
+      "ground_contact": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "status": "PASS",
+      "review_reasons": [],
+      "sprite_sha256": "4b392f1b4929c13a297cd9dd1863518c52b77d342d0a7c8ec0242d548855797a",
+      "catalog_version": 1
+    },
+    {
+      "name": "nature_running_shoes_02",
+      "type": "object",
+      "x": 326,
+      "y": 2,
+      "width": 128,
+      "height": 96,
+      "slots": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "anchor": [
+        64,
+        96
+      ],
+      "placement_offset": {
+        "x": 1,
+        "y": 8
+      },
+      "ground_contact": {
+        "x": 0.5,
+        "y": 0.84
+      },
+      "status": "PASS",
+      "review_reasons": [],
+      "sprite_sha256": "4c2f3d7061264e59ebe0c986ddfe82360739d2702d56768b1c56626a608c0e6a",
+      "catalog_version": 1
+    },
+    {
+      "name": "nature_treadmill_02",
+      "type": "object",
+      "x": 2,
+      "y": 164,
+      "width": 160,
+      "height": 144,
+      "slots": {
+        "x": 2,
+        "y": 1,
+        "z": 2
+      },
+      "anchor": [
+        80,
+        144
+      ],
+      "placement_offset": {
+        "x": -5,
+        "y": 19
+      },
+      "ground_contact": null,
+      "status": "PASS",
+      "review_reasons": [],
+      "sprite_sha256": "166e908fa7791cfba88faffad8eef21fa0c376dc99742c003de7b1ee21cc1055",
+      "catalog_version": 1
+    }
+  ],
+  "atlas_sha256": "c3f1449f2944a84fbd3c1b397d3e0cbdff1b6386968e29342d9f2f533b48d2e2"
+}

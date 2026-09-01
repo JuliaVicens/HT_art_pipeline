@@ -1,0 +1,446 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "asset": "nature_bench_01",
+      "asset_type": "object",
+      "segmentation": null,
+      "top_inset": null,
+      "tiling": "none",
+      "projection": "silhouette",
+      "side_mode": "none",
+      "edge_blend": 0,
+      "seam_score": null,
+      "source": "C:/Users/julia/DesktopLocal/HT/art_pipeline/sources/nature_bench_01.source.png",
+      "output": "C:/Users/julia/DesktopLocal/HT/art_pipeline/output/nature_bench_01.png",
+      "palette": "nature",
+      "palette_version": 1,
+      "dimensions": {
+        "width": 64,
+        "depth": 32,
+        "height": 64
+      },
+      "slots": {
+        "x": 2,
+        "y": 1,
+        "z": 1
+      },
+      "object_scale": 0.8,
+      "object_scale_requested": 0.8,
+      "anchor": [
+        80,
+        112
+      ],
+      "placement_offset": {
+        "x": 0,
+        "y": 20
+      },
+      "ground_contact": null,
+      "mirror_x": false,
+      "shear_y": 0.0,
+      "auto_aligned": true,
+      "alignment_method": "shape_preserved",
+      "geometry_locked": true,
+      "geometry_qa": {
+        "expected_slope": 0.5,
+        "measured_slope": 0.3066,
+        "absolute_error": 0.1934,
+        "status": "review"
+      },
+      "containment_qa": {
+        "support_pixels": 344,
+        "outside_before": 0,
+        "outside_after": 0,
+        "outside_fraction": 0.0,
+        "uniform_scale": 1.0,
+        "status": "pass"
+      },
+      "exact_axis_scores": {
+        "axis_positive_half": 0.6918,
+        "axis_negative_half": 0.5803,
+        "vertical": 0.6066
+      },
+      "canvas_size": [
+        160,
+        112
+      ],
+      "sha256": "f77554bd7fd054f8a55e8b78da245a7609e66e6e53d994a09073cdaaa1059df1",
+      "generated_at": "2026-09-01T20:02:07.767957+00:00"
+    },
+    {
+      "asset": "nature_bench_press_01",
+      "asset_type": "object",
+      "segmentation": null,
+      "top_inset": null,
+      "tiling": "none",
+      "projection": "silhouette",
+      "side_mode": "none",
+      "edge_blend": 0,
+      "seam_score": null,
+      "source": "C:/Users/julia/DesktopLocal/HT/art_pipeline/sources/nature_bench_press_01.source.png",
+      "output": "C:/Users/julia/DesktopLocal/HT/art_pipeline/output/nature_bench_press_01.png",
+      "palette": "nature",
+      "palette_version": 1,
+      "dimensions": {
+        "width": 64,
+        "depth": 32,
+        "height": 64
+      },
+      "slots": {
+        "x": 2,
+        "y": 2,
+        "z": 2
+      },
+      "object_scale": 0.8,
+      "object_scale_requested": 0.8,
+      "anchor": [
+        96,
+        160
+      ],
+      "placement_offset": {
+        "x": 3,
+        "y": 23
+      },
+      "ground_contact": null,
+      "mirror_x": false,
+      "shear_y": 0.0,
+      "auto_aligned": true,
+      "alignment_method": "shape_preserved",
+      "geometry_locked": true,
+      "geometry_qa": null,
+      "containment_qa": {
+        "support_pixels": 1142,
+        "outside_before": 0,
+        "outside_after": 0,
+        "outside_fraction": 0.0,
+        "uniform_scale": 1.0,
+        "status": "pass"
+      },
+      "exact_axis_scores": {
+        "axis_positive_half": 0.5309,
+        "axis_negative_half": 0.4992,
+        "vertical": 0.5234
+      },
+      "canvas_size": [
+        192,
+        160
+      ],
+      "sha256": "d32776fee3a02644ed217eee99fbc1b3fa4fd49bbaa160bfa5108b550c2932b3",
+      "generated_at": "2026-09-01T20:02:10.152219+00:00"
+    },
+    {
+      "asset": "nature_dirt_03",
+      "asset_type": "terrain",
+      "segmentation": "estimated",
+      "top_inset": 0.04,
+      "tiling": "none",
+      "projection": "legacy",
+      "side_mode": "palette",
+      "edge_blend": 2,
+      "seam_score": null,
+      "source": "C:/Users/julia/DesktopLocal/HT/art_pipeline/sources/nature_dirt_03.source.png",
+      "output": "C:/Users/julia/DesktopLocal/HT/art_pipeline/output/nature_dirt_03.png",
+      "palette": "nature",
+      "palette_version": 1,
+      "dimensions": {
+        "width": 64,
+        "depth": 32,
+        "height": 8
+      },
+      "slots": null,
+      "object_scale": null,
+      "object_scale_requested": null,
+      "anchor": null,
+      "placement_offset": null,
+      "ground_contact": null,
+      "mirror_x": null,
+      "shear_y": null,
+      "auto_aligned": null,
+      "alignment_method": null,
+      "geometry_locked": null,
+      "geometry_qa": null,
+      "containment_qa": null,
+      "exact_axis_scores": null,
+      "canvas_size": [
+        64,
+        40
+      ],
+      "sha256": "35fbd97e7e728d1b15619b617e4896a348c7b296ba6c470e4ea4f7c8bb7cf7b8",
+      "generated_at": "2026-09-01T20:02:04.937003+00:00"
+    },
+    {
+      "asset": "nature_grass_03",
+      "asset_type": "terrain",
+      "segmentation": "estimated",
+      "top_inset": 0.04,
+      "tiling": "none",
+      "projection": "legacy",
+      "side_mode": "palette",
+      "edge_blend": 2,
+      "seam_score": null,
+      "source": "C:/Users/julia/DesktopLocal/HT/art_pipeline/sources/nature_grass_03.source.png",
+      "output": "C:/Users/julia/DesktopLocal/HT/art_pipeline/output/nature_grass_03.png",
+      "palette": "nature",
+      "palette_version": 1,
+      "dimensions": {
+        "width": 64,
+        "depth": 32,
+        "height": 8
+      },
+      "slots": null,
+      "object_scale": null,
+      "object_scale_requested": null,
+      "anchor": null,
+      "placement_offset": null,
+      "ground_contact": null,
+      "mirror_x": null,
+      "shear_y": null,
+      "auto_aligned": null,
+      "alignment_method": null,
+      "geometry_locked": null,
+      "geometry_qa": null,
+      "containment_qa": null,
+      "exact_axis_scores": null,
+      "canvas_size": [
+        64,
+        40
+      ],
+      "sha256": "6e6c4047d96a7e3b816b05243c6dd5dd2dceda3fd1b4ad357a7ee05e0b0d007f",
+      "generated_at": "2026-09-01T20:02:05.594477+00:00"
+    },
+    {
+      "asset": "nature_potted_plant_02",
+      "asset_type": "object",
+      "segmentation": null,
+      "top_inset": null,
+      "tiling": "none",
+      "projection": "silhouette",
+      "side_mode": "none",
+      "edge_blend": 0,
+      "seam_score": null,
+      "source": "C:/Users/julia/DesktopLocal/HT/art_pipeline/sources/nature_potted_plant_02.source.png",
+      "output": "C:/Users/julia/DesktopLocal/HT/art_pipeline/output/nature_potted_plant_02.png",
+      "palette": "nature",
+      "palette_version": 1,
+      "dimensions": {
+        "width": 64,
+        "depth": 32,
+        "height": 64
+      },
+      "slots": {
+        "x": 1,
+        "y": 1,
+        "z": 2
+      },
+      "object_scale": 0.8,
+      "object_scale_requested": 0.8,
+      "anchor": [
+        64,
+        128
+      ],
+      "placement_offset": {
+        "x": 1,
+        "y": 6
+      },
+      "ground_contact": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "mirror_x": false,
+      "shear_y": 0.0,
+      "auto_aligned": true,
+      "alignment_method": "declared_contact",
+      "geometry_locked": true,
+      "geometry_qa": null,
+      "containment_qa": {
+        "support_pixels": 109,
+        "outside_before": 0,
+        "outside_after": 0,
+        "outside_fraction": 0.0,
+        "uniform_scale": 1.0,
+        "status": "pass"
+      },
+      "exact_axis_scores": {
+        "axis_positive_half": 0.4955,
+        "axis_negative_half": 0.4099,
+        "vertical": 0.4009
+      },
+      "canvas_size": [
+        128,
+        128
+      ],
+      "sha256": "4b392f1b4929c13a297cd9dd1863518c52b77d342d0a7c8ec0242d548855797a",
+      "generated_at": "2026-09-01T20:02:11.650376+00:00"
+    },
+    {
+      "asset": "nature_running_shoes_02",
+      "asset_type": "object",
+      "segmentation": null,
+      "top_inset": null,
+      "tiling": "none",
+      "projection": "silhouette",
+      "side_mode": "none",
+      "edge_blend": 0,
+      "seam_score": null,
+      "source": "C:/Users/julia/DesktopLocal/HT/art_pipeline/sources/nature_running_shoes_02.source.png",
+      "output": "C:/Users/julia/DesktopLocal/HT/art_pipeline/output/nature_running_shoes_02.png",
+      "palette": "nature",
+      "palette_version": 1,
+      "dimensions": {
+        "width": 64,
+        "depth": 32,
+        "height": 64
+      },
+      "slots": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "object_scale": 0.8,
+      "object_scale_requested": 0.8,
+      "anchor": [
+        64,
+        96
+      ],
+      "placement_offset": {
+        "x": 1,
+        "y": 8
+      },
+      "ground_contact": {
+        "x": 0.5,
+        "y": 0.84
+      },
+      "mirror_x": false,
+      "shear_y": 0.0,
+      "auto_aligned": true,
+      "alignment_method": "declared_contact",
+      "geometry_locked": true,
+      "geometry_qa": null,
+      "containment_qa": {
+        "support_pixels": 82,
+        "outside_before": 0,
+        "outside_after": 0,
+        "outside_fraction": 0.0,
+        "uniform_scale": 1.0,
+        "status": "pass"
+      },
+      "exact_axis_scores": {
+        "axis_positive_half": 0.4054,
+        "axis_negative_half": 0.4459,
+        "vertical": 0.277
+      },
+      "canvas_size": [
+        128,
+        96
+      ],
+      "sha256": "4c2f3d7061264e59ebe0c986ddfe82360739d2702d56768b1c56626a608c0e6a",
+      "generated_at": "2026-09-01T20:02:13.178295+00:00"
+    },
+    {
+      "asset": "nature_treadmill_02",
+      "asset_type": "object",
+      "segmentation": null,
+      "top_inset": null,
+      "tiling": "none",
+      "projection": "silhouette",
+      "side_mode": "none",
+      "edge_blend": 0,
+      "seam_score": null,
+      "source": "C:/Users/julia/DesktopLocal/HT/art_pipeline/sources/nature_treadmill_02.source.png",
+      "output": "C:/Users/julia/DesktopLocal/HT/art_pipeline/output/nature_treadmill_02.png",
+      "palette": "nature",
+      "palette_version": 1,
+      "dimensions": {
+        "width": 64,
+        "depth": 32,
+        "height": 64
+      },
+      "slots": {
+        "x": 2,
+        "y": 1,
+        "z": 2
+      },
+      "object_scale": 0.736,
+      "object_scale_requested": 0.8,
+      "anchor": [
+        80,
+        144
+      ],
+      "placement_offset": {
+        "x": -5,
+        "y": 19
+      },
+      "ground_contact": null,
+      "mirror_x": false,
+      "shear_y": 0.0,
+      "auto_aligned": true,
+      "alignment_method": "support_plane",
+      "geometry_locked": true,
+      "geometry_qa": {
+        "expected_slope": 0.5,
+        "measured_slope": 0.4271,
+        "absolute_error": 0.0729,
+        "status": "pass"
+      },
+      "containment_qa": {
+        "support_pixels": 962,
+        "outside_before": 12,
+        "outside_after": 0,
+        "outside_fraction": 0.0,
+        "uniform_scale": 0.92,
+        "status": "pass"
+      },
+      "exact_axis_scores": {
+        "axis_positive_half": 0.5965,
+        "axis_negative_half": 0.4553,
+        "vertical": 0.389
+      },
+      "canvas_size": [
+        160,
+        144
+      ],
+      "sha256": "166e908fa7791cfba88faffad8eef21fa0c376dc99742c003de7b1ee21cc1055",
+      "generated_at": "2026-09-01T20:02:16.932263+00:00"
+    },
+    {
+      "asset": "nature_water_03",
+      "asset_type": "terrain",
+      "segmentation": "estimated",
+      "top_inset": 0.04,
+      "tiling": "none",
+      "projection": "legacy",
+      "side_mode": "palette",
+      "edge_blend": 2,
+      "seam_score": null,
+      "source": "C:/Users/julia/DesktopLocal/HT/art_pipeline/sources/nature_water_03.source.png",
+      "output": "C:/Users/julia/DesktopLocal/HT/art_pipeline/output/nature_water_03.png",
+      "palette": "nature",
+      "palette_version": 1,
+      "dimensions": {
+        "width": 64,
+        "depth": 32,
+        "height": 0
+      },
+      "slots": null,
+      "object_scale": null,
+      "object_scale_requested": null,
+      "anchor": null,
+      "placement_offset": null,
+      "ground_contact": null,
+      "mirror_x": null,
+      "shear_y": null,
+      "auto_aligned": null,
+      "alignment_method": null,
+      "geometry_locked": null,
+      "geometry_qa": null,
+      "containment_qa": null,
+      "exact_axis_scores": null,
+      "canvas_size": [
+        64,
+        32
+      ],
+      "sha256": "ceebb99f90057481dadcd110466c516923a43249c2223b695585cab21b3d973e",
+      "generated_at": "2026-09-01T20:02:05.954779+00:00"
+    }
+  ]
+}

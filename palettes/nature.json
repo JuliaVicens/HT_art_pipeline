@@ -1,0 +1,23 @@
+{
+  "id": "nature",
+  "version": 1,
+  "description": "HabitTracker Nature: calm pastel foliage, cream light and warm earth.",
+  "transparent": "#00000000",
+  "colors": [
+    { "name": "cream",       "hex": "#FFF3D6" },
+    { "name": "sunlight",    "hex": "#E6E89A" },
+    { "name": "mint",        "hex": "#BFD99A" },
+    { "name": "grass",       "hex": "#94BF83" },
+    { "name": "sage",        "hex": "#739E78" },
+    { "name": "moss",        "hex": "#527665" },
+    { "name": "deep_moss",   "hex": "#3D5B52" },
+    { "name": "peach",       "hex": "#E7A27F" },
+    { "name": "clay",        "hex": "#C77C68" },
+    { "name": "earth",       "hex": "#955F59" },
+    { "name": "blossom",     "hex": "#E8B4B8" },
+    { "name": "sky_accent",  "hex": "#A8CED0" },
+    { "name": "water_light", "hex": "#C7E3D5" },
+    { "name": "water",       "hex": "#86C5C5" },
+    { "name": "water_deep",  "hex": "#5D9FA7" }
+  ]
+}
