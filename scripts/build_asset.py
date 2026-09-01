@@ -31,6 +31,9 @@ def main() -> None:
                         help="Uniform object fit within its slots (default: 0.8)")
     parser.add_argument("--ground-contact", type=float, nargs=2, metavar=("X", "Y"),
                         help="Normalized semantic contact override for an object")
+    parser.add_argument("--chroma-key", help="Remove this declared RGB hex color globally")
+    parser.add_argument("--chroma-tolerance", type=int, default=0,
+                        help="Per-channel chroma distance (0..64)")
     parser.add_argument("--skip-qa", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parent.parent,
                         help=argparse.SUPPRESS)
@@ -64,6 +67,9 @@ def main() -> None:
         ]
         if args.ground_contact:
             command += ["--ground-contact", *(str(value) for value in args.ground_contact)]
+        if args.chroma_key:
+            command += ["--chroma-key", args.chroma_key,
+                        "--chroma-tolerance", str(args.chroma_tolerance)]
     else:
         height = args.height if args.height is not None else (0 if "water" in name else 8)
         command += [

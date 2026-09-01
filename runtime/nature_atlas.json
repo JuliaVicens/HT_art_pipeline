@@ -1,16 +1,45 @@
 {
   "catalog_version": 1,
   "atlas": "nature_atlas.png",
-  "atlas_width": 456,
-  "atlas_height": 310,
+  "atlas_width": 488,
+  "atlas_height": 408,
   "padding": 2,
   "packing": "name_sorted_shelf_v1",
   "includes_review": false,
   "assets": [
     {
-      "name": "nature_bench_press_01",
+      "name": "nature_baseball_bat_01",
       "type": "object",
       "x": 2,
+      "y": 2,
+      "width": 160,
+      "height": 112,
+      "slots": {
+        "x": 2,
+        "y": 1,
+        "z": 1
+      },
+      "anchor": [
+        80,
+        112
+      ],
+      "placement_offset": {
+        "x": 0,
+        "y": 10
+      },
+      "ground_contact": {
+        "x": 0.5,
+        "y": 0.9
+      },
+      "status": "PASS",
+      "review_reasons": [],
+      "sprite_sha256": "8dc0bb9fde708bcb8f7918edbcc74a57e00302121dbce68ba2a94c855a4dbc34",
+      "catalog_version": 1
+    },
+    {
+      "name": "nature_bench_press_01",
+      "type": "object",
+      "x": 164,
       "y": 2,
       "width": 192,
       "height": 160,
@@ -36,7 +65,7 @@
     {
       "name": "nature_potted_plant_02",
       "type": "object",
-      "x": 196,
+      "x": 358,
       "y": 2,
       "width": 128,
       "height": 128,
@@ -65,8 +94,8 @@
     {
       "name": "nature_running_shoes_02",
       "type": "object",
-      "x": 326,
-      "y": 2,
+      "x": 2,
+      "y": 164,
       "width": 128,
       "height": 96,
       "slots": {
@@ -92,10 +121,68 @@
       "catalog_version": 1
     },
     {
+      "name": "nature_tennis_ball_01",
+      "type": "object",
+      "x": 132,
+      "y": 164,
+      "width": 128,
+      "height": 96,
+      "slots": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "anchor": [
+        64,
+        96
+      ],
+      "placement_offset": {
+        "x": 0,
+        "y": 2
+      },
+      "ground_contact": {
+        "x": 0.5,
+        "y": 0.98
+      },
+      "status": "PASS",
+      "review_reasons": [],
+      "sprite_sha256": "a81155103f2878cd4126f2b535a73ed2e866640df7154a4b05f25266a4eea2e2",
+      "catalog_version": 1
+    },
+    {
+      "name": "nature_tennis_racket_01",
+      "type": "object",
+      "x": 262,
+      "y": 164,
+      "width": 128,
+      "height": 96,
+      "slots": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "anchor": [
+        64,
+        96
+      ],
+      "placement_offset": {
+        "x": 2,
+        "y": 5
+      },
+      "ground_contact": {
+        "x": 0.08,
+        "y": 0.92
+      },
+      "status": "PASS",
+      "review_reasons": [],
+      "sprite_sha256": "4c314408d1ca2b6207bb40e9b3ef28bf630d893da4afe6d57608f1820884d942",
+      "catalog_version": 1
+    },
+    {
       "name": "nature_treadmill_02",
       "type": "object",
       "x": 2,
-      "y": 164,
+      "y": 262,
       "width": 160,
       "height": 144,
       "slots": {
@@ -118,5 +205,5 @@
       "catalog_version": 1
     }
   ],
-  "atlas_sha256": "c3f1449f2944a84fbd3c1b397d3e0cbdff1b6386968e29342d9f2f533b48d2e2"
+  "atlas_sha256": "1f0d987e45f86fe1f6a7ef0e62cc388cd4c189eab37b7cf0a6718a0e88843817"
 }

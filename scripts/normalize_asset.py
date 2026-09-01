@@ -253,6 +253,24 @@ def remove_connected_light_background(image: Image.Image) -> Image.Image:
     return result
 
 
+def remove_chroma_key(image: Image.Image, color: tuple[int, int, int], tolerance: int) -> tuple[Image.Image, int]:
+    """Remove a declared non-art background color everywhere, including enclosed holes."""
+    if not 0 <= tolerance <= 64:
+        raise ValueError("chroma-key tolerance must be between 0 and 64")
+    result = image.copy()
+    pixels = result.load()
+    removed = 0
+    for y in range(result.height):
+        for x in range(result.width):
+            r, g, b, a = pixels[x, y]
+            if a and max(abs(r - color[0]), abs(g - color[1]), abs(b - color[2])) <= tolerance:
+                pixels[x, y] = (0, 0, 0, 0)
+                removed += 1
+    if removed == 0:
+        raise ValueError("Declared chroma key did not match any source pixels")
+    return result, removed
+
+
 def exact_axis_scores(image: Image.Image) -> dict[str, float]:
     """Measure boundary support for exact 2:1 axes and screen verticals."""
     alpha = image.getchannel("A")
@@ -343,6 +361,8 @@ def normalize(
     auto_align_object: bool = False,
     geometry_locked: bool = False,
     ground_contact: tuple[float, float] | None = None,
+    chroma_key: tuple[int, int, int] | None = None,
+    chroma_tolerance: int = 0,
 ) -> dict:
     if not source.is_file():
         raise ValueError(f"Source not found: {source}")
@@ -383,7 +403,13 @@ def normalize(
         # merely because their gameplay footprint is compact.
         canvas_size = (footprint_width + width, object_height + depth)
         # Crop generated transparent margins before applying the requested slot scale.
-        image = remove_connected_light_background(image)
+        chroma_removed = 0
+        if chroma_key is not None:
+            if chroma_key in palette:
+                raise ValueError("chroma-key color must not belong to the asset palette")
+            image, chroma_removed = remove_chroma_key(image, chroma_key, chroma_tolerance)
+        else:
+            image = remove_connected_light_background(image)
         alpha = image.getchannel("A").point(lambda a: 255 if a >= 128 else 0)
         bbox = alpha.getbbox()
         if bbox is None:
@@ -504,6 +530,9 @@ def normalize(
         "placement_offset": {"x": effective_offset[0], "y": effective_offset[1]} if asset_type == "object" else None,
         "ground_contact": {"x": ground_contact[0], "y": ground_contact[1]}
         if asset_type == "object" and ground_contact is not None else None,
+        "background": ({"mode": "chroma_key", "color": "#%02X%02X%02X" % chroma_key,
+                        "tolerance": chroma_tolerance, "pixels_removed": chroma_removed}
+                       if asset_type == "object" and chroma_key is not None else None),
         "mirror_x": effective_mirror if asset_type == "object" else None,
         "shear_y": round(effective_shear, 4) if asset_type == "object" else None,
         "auto_aligned": auto_align_object if asset_type == "object" else None,
@@ -679,6 +708,9 @@ def main() -> None:
                         help="Preserve approved exact angles; auto-align position only")
     parser.add_argument("--ground-contact", type=float, nargs=2, metavar=("X", "Y"),
                         help="Normalized semantic ground-contact point in visible bounds")
+    parser.add_argument("--chroma-key", help="Declared RGB hex background removed globally")
+    parser.add_argument("--chroma-tolerance", type=int, default=0,
+                        help="Maximum per-channel chroma distance (0..64)")
     args = parser.parse_args()
     entry = normalize(
         args.source, args.palette, args.output,
@@ -695,6 +727,8 @@ def main() -> None:
         args.auto_align_object,
         args.geometry_locked,
         tuple(args.ground_contact) if args.ground_contact else None,
+        hex_rgb(args.chroma_key) if args.chroma_key else None,
+        args.chroma_tolerance,
     )
     args.manifest.parent.mkdir(parents=True, exist_ok=True)
     manifest = {"schema_version": 1, "assets": []}

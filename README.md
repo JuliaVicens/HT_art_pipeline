@@ -139,6 +139,32 @@ visible silhouette (`0..1`). It identifies semantic contacts such as a sole or
 pot base when alpha-only inference is ambiguous. Declared contact locks vertical
 placement; containment may still correct X or uniformly reduce the sprite.
 
+### Chroma-key object inputs
+
+True-alpha object sources remain preferred. When an input must use an opaque
+background, choose a flat color that does not occur in the Nature palette and
+declare it explicitly:
+
+```json
+{
+  "schema_version": 1,
+  "slots": [1, 1, 1],
+  "background": {
+    "mode": "chroma_key",
+    "color": "#FF00FF",
+    "tolerance": 0
+  }
+}
+```
+
+The chroma color is removed globally before alpha crop, including where it is
+visible through enclosed handles, frames or object openings. Intentional white
+and cream pixels are preserved. The declared key is rejected if it belongs to
+the active palette, a key matching no pixels fails the build, and tolerance is
+limited to `0..64`. The manifest records the mode, color, tolerance and number
+of removed pixels. Do not use a textured background, lighting spill or a chroma
+color present in the object itself.
+
 ## Asset contract
 
 - Dimensions: `width` is horizontal surface size, `depth` is surface depth and

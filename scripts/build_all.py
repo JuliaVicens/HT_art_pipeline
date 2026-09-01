@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 
 
-OBJECT_KEYS = {"schema_version", "slots", "object_scale", "ground_contact", "enabled"}
+OBJECT_KEYS = {"schema_version", "slots", "object_scale", "ground_contact", "background", "enabled"}
 TERRAIN_KEYS = {"schema_version", "height", "enabled"}
 
 
@@ -66,6 +66,14 @@ def main() -> None:
                                     or any(not isinstance(contact[key], (int, float))
                                            or not 0 <= contact[key] <= 1 for key in ("x", "y"))):
             raise ValueError(f"{config_path.name}: ground_contact needs x/y values between 0 and 1")
+        background = config.get("background")
+        if background is not None:
+            if (not isinstance(background, dict) or set(background) != {"mode", "color", "tolerance"}
+                    or background.get("mode") != "chroma_key"
+                    or not isinstance(background.get("color"), str)
+                    or not isinstance(background.get("tolerance"), int)
+                    or not 0 <= background["tolerance"] <= 64):
+                raise ValueError(f"{config_path.name}: background needs chroma_key mode, color and tolerance 0..64")
         object_configs[source.resolve()] = (config_path, config)
 
     terrain_configs = {}
@@ -108,6 +116,10 @@ def main() -> None:
         if "ground_contact" in config:
             contact = config["ground_contact"]
             command += ["--ground-contact", str(contact["x"]), str(contact["y"])]
+        if "background" in config:
+            background = config["background"]
+            command += ["--chroma-key", background["color"],
+                        "--chroma-tolerance", str(background["tolerance"])]
         run(command)
         built_objects.append(output / f"{source.name.removesuffix('.source.png')}.png")
 
