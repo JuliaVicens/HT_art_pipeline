@@ -1,0 +1,13 @@
+{
+  "id": "bedroom_pastel", "version": 1,
+  "description": "Warm cozy pastel bedroom furniture.",
+  "transparent": "#00000000",
+  "colors": [
+    {"name":"cream","hex":"#FFF3D6"},{"name":"light_cream","hex":"#F7E5C6"},
+    {"name":"peach","hex":"#E7A27F"},{"name":"clay","hex":"#C77C68"},
+    {"name":"earth","hex":"#955F59"},{"name":"blossom","hex":"#E8B4B8"},
+    {"name":"sage","hex":"#739E78"},{"name":"moss","hex":"#527665"},
+    {"name":"deep_moss","hex":"#3D5B52"},{"name":"wood_light","hex":"#D88B5B"},
+    {"name":"wood","hex":"#AD603F"},{"name":"wood_dark","hex":"#6E4034"}
+  ]
+}

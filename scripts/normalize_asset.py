@@ -247,7 +247,12 @@ def remove_connected_light_background(image: Image.Image) -> Image.Image:
         if not (a < 128 or is_light_neutral):
             continue
         pixels[x, y] = (0, 0, 0, 0)
-        for nx, ny in ((x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)):
+        # Generated pixel-art backgrounds can remain connected through a
+        # diagonal one-pixel opening (handles, chair backs, thin frames). Use
+        # 8-connectivity so those background pockets are not mistaken for art.
+        for nx, ny in ((x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1),
+                       (x - 1, y - 1), (x + 1, y - 1),
+                       (x - 1, y + 1), (x + 1, y + 1)):
             if 0 <= nx < width and 0 <= ny < height and (nx, ny) not in seen:
                 queue.append((nx, ny))
     return result
@@ -428,7 +433,12 @@ def normalize(
             desired_slope = -0.5 if sy > sx else (0.5 if sx > sy else 0.0)
             expected_slope = desired_slope if desired_slope else None
             if geometry_locked:
-                effective_mirror = object_mirror_x
+                # Geometry lock forbids shear/stretch, but a horizontal mirror
+                # preserves proportions and is required when the authored long
+                # axis points along the opposite isometric grid axis.
+                effective_mirror = (object_mirror_x or bool(
+                    desired_slope and source_slope * desired_slope < 0
+                ))
                 if effective_mirror:
                     image = image.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
                     source_slope = -source_slope

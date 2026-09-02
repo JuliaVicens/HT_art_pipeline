@@ -19,6 +19,8 @@ if ($RoomLab) {
     if ($Source -or $Slots -or $Height -ge 0 -or $PSBoundParameters.ContainsKey("ObjectScale")) {
         throw "-RoomLab cannot be combined with asset build parameters"
     }
+    & "$Root\.venv\Scripts\python.exe" "$Root\scripts\build_room_assets.py" --root $Root
+    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
     & "$Root\.venv\Scripts\python.exe" "$Root\scripts\build_room_lab.py" --root $Root
     exit $LASTEXITCODE
 }

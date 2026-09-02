@@ -1,0 +1,12 @@
+{
+  "id": "bedroom_gamer", "version": 1,
+  "description": "Cozy dark gamer bedroom furniture.",
+  "transparent": "#00000000",
+  "colors": [
+    {"name":"lavender_light","hex":"#F0E5FF"},{"name":"lavender","hex":"#CBB8F0"},
+    {"name":"violet","hex":"#9B62D4"},{"name":"purple","hex":"#743487"},
+    {"name":"plum","hex":"#55205F"},{"name":"cyan","hex":"#35C1CF"},
+    {"name":"cyan_dark","hex":"#168A9E"},{"name":"steel","hex":"#596071"},
+    {"name":"charcoal","hex":"#292B36"},{"name":"near_black","hex":"#11151F"}
+  ]
+}

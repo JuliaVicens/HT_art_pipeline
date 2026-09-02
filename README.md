@@ -334,8 +334,9 @@ push it downward and mistake the upper pot or shoe body for the ground base.
 
 Use `--geometry-locked` to preserve pixel-art shape. The pipeline still crops,
 scales uniformly, quantizes and centers contact points, but it is forbidden from
-shearing or stretching the sprite. An explicit mirror is permitted because it
-does not alter proportions. Angle mismatches must be reported in QA and fixed in
+shearing or stretching the sprite. Auto-alignment mirrors the sprite when its
+long axis points opposite to the declared X/Y footprint; mirroring does not alter
+proportions. Remaining angle mismatches must be reported in QA and fixed in
 the source rather than hidden through deformation.
 For elongated objects, `geometry_qa` in the manifest records the expected and
 measured axis slopes, absolute error, and `pass`/`review` status. The current
@@ -345,7 +346,9 @@ and reports support for `+1/2`, `-1/2` and screen-vertical directions. It uses n
 network, AI call or heavy computer-vision dependency, so it can run for every
 object on every build.
 
-Connected white or checkerboard backgrounds are removed automatically from the
-image border before alpha crop; internal cream details remain intact. Specialized
+White or checkerboard backgrounds are removed automatically from the image
+border before alpha crop. The flood fill uses eight-direction connectivity so
+diagonally open gaps in handles, frames and chair backs are cleaned as background,
+while genuinely enclosed cream details remain intact. Specialized
 local source builders may still be run explicitly, but only a resulting source
 with the appropriate declaration participates in the discovered collection.

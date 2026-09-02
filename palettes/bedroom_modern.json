@@ -1,0 +1,12 @@
+{
+  "id": "bedroom_modern", "version": 1,
+  "description": "Quiet contemporary bedroom furniture.",
+  "transparent": "#00000000",
+  "colors": [
+    {"name":"white","hex":"#F7F4EE"},{"name":"cream","hex":"#E9DFD0"},
+    {"name":"sand","hex":"#D2B89D"},{"name":"tan","hex":"#B7987D"},
+    {"name":"blue_gray","hex":"#899BA8"},{"name":"slate","hex":"#596872"},
+    {"name":"walnut_light","hex":"#786A5D"},{"name":"walnut","hex":"#51473F"},
+    {"name":"charcoal","hex":"#302E2D"},{"name":"outline","hex":"#222425"}
+  ]
+}

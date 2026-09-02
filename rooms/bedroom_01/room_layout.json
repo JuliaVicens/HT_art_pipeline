@@ -20,6 +20,7 @@
     "shelf_slot": {"surface": "right_wall", "wall_position": [5, 2], "slots": [2, 1, 1], "orientation": "wall_right", "z_index": 330},
     "bed_slot": {"surface": "floor", "grid_position": [0, 4, 0], "slots": [3, 2, 2], "orientation": "axis_x", "z_index": 410},
     "desk_slot": {"surface": "floor", "grid_position": [4, 1, 0], "slots": [3, 2, 2], "orientation": "axis_x", "z_index": 420},
+    "chair_slot": {"surface": "floor", "grid_position": [5, 3, 0], "slots": [1, 1, 2], "orientation": "faces_axis_y_negative", "z_index": 425},
     "lamp_slot": {"surface": "floor", "grid_position": [6, 4, 0], "slots": [1, 1, 2], "orientation": "upright", "z_index": 430}
   }
 }

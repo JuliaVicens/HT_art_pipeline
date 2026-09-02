@@ -13,15 +13,18 @@ from PIL import Image, ImageDraw, ImageFont
 THEMES = {
     "pastel": {
         "wall_top": "#FFF8EF", "wall_left": "#F2B8B5", "wall_right": "#DFA2AD",
-        "floor": "#DDA86F", "floor_line": "#B87D4C", "outline": "#8B6758",
+        "floor": "#DDA86F", "floor_alt": "#E7B77F", "floor_line": "#B87D4C", "outline": "#8B6758",
+        "wall_detail": "#F7D7D2", "floor_pattern": "checker",
     },
     "modern": {
         "wall_top": "#F7F4EE", "wall_left": "#AABAC5", "wall_right": "#899BA8",
-        "floor": "#C79762", "floor_line": "#9E7045", "outline": "#596872",
+        "floor": "#C79762", "floor_alt": "#D1A371", "floor_line": "#9E7045", "outline": "#596872",
+        "wall_detail": "#CFD8DD", "floor_pattern": "planks",
     },
     "gamer": {
         "wall_top": "#F7F2FC", "wall_left": "#BCA9DB", "wall_right": "#9B85C1",
-        "floor": "#B7AAA2", "floor_line": "#8B7C79", "outline": "#65567D",
+        "floor": "#46424F", "floor_alt": "#514A5C", "floor_line": "#766A82", "outline": "#65567D",
+        "wall_detail": "#D8C9EB", "floor_pattern": "grid",
     },
 }
 
@@ -60,6 +63,17 @@ def draw_walls(size: tuple[int, int], palette: dict[str, str], layout: dict) -> 
     draw.polygon([left_div, back_div, back, left], fill=rgba(palette["wall_left"]))
     draw.polygon([back_div, right_div, right, back], fill=rgba(palette["wall_right"]))
 
+    # Sparse, clipped pixel-art accents distinguish themes without changing geometry.
+    detail = rgba(palette["wall_detail"])
+    for step in range(1, cells_y):
+        start = iso(layout, 0, step, band + 0.18)
+        end = iso(layout, 0, step + 0.55, band + 0.18)
+        draw.line([start, end], fill=detail, width=2)
+    for step in range(1, cells_x):
+        start = iso(layout, step, 0, band + 0.18)
+        end = iso(layout, step + 0.55, 0, band + 0.18)
+        draw.line([start, end], fill=detail, width=2)
+
     outline = rgba(palette["outline"])
     for start, end in [(top_left, top_back), (top_back, top_right), (top_left, left),
                        (top_right, right), (top_back, back), (left, back), (back, right),
@@ -77,6 +91,27 @@ def draw_floor(size: tuple[int, int], palette: dict[str, str], layout: dict) -> 
     texture = Image.new("RGBA", size, rgba(palette["floor"]))
     lines = ImageDraw.Draw(texture)
     line_color = rgba(palette["floor_line"])
+
+    if palette["floor_pattern"] == "checker":
+        for x in range(cells_x):
+            for y in range(cells_y):
+                if (x + y) % 2:
+                    lines.polygon([iso(layout, x, y), iso(layout, x + 1, y),
+                                   iso(layout, x + 1, y + 1), iso(layout, x, y + 1)],
+                                  fill=rgba(palette["floor_alt"]))
+    elif palette["floor_pattern"] == "planks":
+        for x in range(cells_x):
+            for y in range(cells_y):
+                if (x + 2 * y) % 3 == 0:
+                    a = iso(layout, x + 0.12, y + 0.5)
+                    b = iso(layout, x + 0.88, y + 0.5)
+                    lines.line([a, b], fill=rgba(palette["floor_alt"]), width=2)
+    else:
+        for x in range(0, cells_x, 2):
+            for y in range(0, cells_y, 2):
+                points_cell = [iso(layout, x, y), iso(layout, x + 1, y),
+                               iso(layout, x + 1, y + 1), iso(layout, x, y + 1)]
+                lines.polygon(points_cell, fill=rgba(palette["floor_alt"]))
 
     for x in range(cells_x + 1):
         lines.line([iso(layout, x, 0), iso(layout, x, cells_y)], fill=line_color, width=1)
@@ -117,6 +152,13 @@ def main() -> None:
 
     layers = {}
     panels = []
+    room_manifest_path = room / "room_assets_manifest.json"
+    room_manifest = (json.loads(room_manifest_path.read_text(encoding="utf-8"))
+                     if room_manifest_path.is_file() else {"assets": []})
+    room_assets = {entry["asset"]: entry for entry in room_manifest["assets"]}
+    room_catalog_path = room / "room_assets.json"
+    room_catalog = (json.loads(room_catalog_path.read_text(encoding="utf-8"))
+                    if room_catalog_path.is_file() else {"assets": []})
     for theme, palette in THEMES.items():
         wall = draw_walls(size, palette, layout)
         floor = draw_floor(size, palette, layout)
@@ -128,6 +170,25 @@ def main() -> None:
         preview.save(previews / f"room_{theme}.png", optimize=True)
         layers[theme] = (wall, floor)
         panels.append(label_panel(preview, theme.upper()))
+
+        furnished = preview.copy()
+        themed_assets = [entry for entry in room_catalog["assets"] if entry["theme"] == theme]
+        themed_assets.sort(key=lambda entry: layout["slots"][entry["slot"]]["z_index"])
+        for declaration in themed_assets:
+            furniture = room / "assets" / "furniture" / f"{declaration['name']}.png"
+            if not furniture.is_file():
+                continue
+            sprite = Image.open(furniture).convert("RGBA")
+            asset = room_assets.get(declaration["name"], {})
+            offset = asset.get("placement_offset") or {"x": 0, "y": 0}
+            slot = layout["slots"][declaration["slot"]]
+            x, y, _ = slot["grid_position"]
+            width, depth, _ = slot["slots"]
+            anchor = iso(layout, x + width / 2, y + depth / 2)
+            anchor = (anchor[0] + int(offset["x"]), anchor[1] + int(offset["y"]))
+            furnished.alpha_composite(sprite, (anchor[0] - sprite.width // 2,
+                                                anchor[1] - sprite.height))
+        furnished.save(previews / f"room_{theme}_furnished.png", optimize=True)
 
     reference_wall_alpha = layers["pastel"][0].getchannel("A").tobytes()
     reference_floor_alpha = layers["pastel"][1].getchannel("A").tobytes()
@@ -171,13 +232,18 @@ def main() -> None:
     slot_colors = {
         "bed_slot": (239, 75, 98, 150),
         "desk_slot": (35, 145, 220, 150),
+        "chair_slot": (71, 191, 118, 170),
         "lamp_slot": (245, 166, 35, 170),
         "window_slot": (36, 181, 165, 150),
         "corkboard_slot": (240, 105, 45, 150),
         "shelf_slot": (134, 91, 210, 150),
     }
-    for slot_name, color in slot_colors.items():
-        slot = layout["slots"][slot_name]
+    drawable_slots = [(name, slot) for name, slot in layout["slots"].items()
+                      if name not in {"wall_slot", "floor_slot"}]
+    for index, (slot_name, slot) in enumerate(drawable_slots):
+        color = slot_colors.get(slot_name, (80 + index * 29 % 150,
+                                            110 + index * 41 % 120,
+                                            150 + index * 31 % 100, 150))
         if slot["surface"] == "floor":
             x, y, _ = slot["grid_position"]
             width, depth, _ = slot["slots"]
