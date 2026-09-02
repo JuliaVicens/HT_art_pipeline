@@ -5,6 +5,23 @@ runtime-ready isometric block. It enforces the first **Nature** palette, an
 explicit `width x depth x height`, hard-edged transparency, nearest-neighbour reduction, palette
 quantization, snake-case naming and a checksum manifest.
 
+## Room Lab
+
+Room composition is validated in `rooms/bedroom_01` before it is integrated in
+Flutter. Build the current empty-room experiment with:
+
+```powershell
+.\run.ps1 -RoomLab
+```
+
+The wall and floor are exported as independent full-canvas transparent layers
+for every visual variant. Open
+`rooms/bedroom_01/previews/comparison_montage.png` for the fastest review, or
+`room_geometry_qa.png` to inspect the shared anchor and floor corners. Geometry
+lives only in `room_layout.json`; variant images never own placement data.
+`room_slots_qa.png` overlays every fixed object footprint, wall bound and anchor
+without requiring any object art to exist yet.
+
 New generated inputs should follow `prompts/terrain_source_prompt.md`. Its
 composition contract keeps patterns centered, limits low-frequency variation,
 reserves neutral edges and standardizes connected-path endpoints before the

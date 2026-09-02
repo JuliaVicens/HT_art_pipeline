@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "room_id": "bedroom_01",
+  "logical_size": [640, 480],
+  "grid": {
+    "projection": "isometric_2_to_1",
+    "tile_size": [64, 32],
+    "elevation_step": 32,
+    "origin": [320, 190],
+    "floor_cells": [8, 8],
+    "wall_height_cells": 6,
+    "wall_color_band_cells": 2
+  },
+  "camera": {"fixed": true, "daylight_direction": "window_left"},
+  "slots": {
+    "wall_slot": {"surface": "room", "grid_position": [0, 0, 0], "slots": [8, 8, 6], "z_index": 100, "variants": ["pastel", "modern", "gamer"]},
+    "floor_slot": {"surface": "floor", "grid_position": [0, 0, 0], "slots": [8, 8, 0], "z_index": 200, "variants": ["pastel", "modern", "gamer"]},
+    "window_slot": {"surface": "left_wall", "wall_position": [1, 1], "slots": [2, 1, 2], "orientation": "wall_left", "z_index": 310},
+    "corkboard_slot": {"surface": "right_wall", "wall_position": [2, 1], "slots": [2, 1, 2], "orientation": "wall_right", "z_index": 320},
+    "shelf_slot": {"surface": "right_wall", "wall_position": [5, 2], "slots": [2, 1, 1], "orientation": "wall_right", "z_index": 330},
+    "bed_slot": {"surface": "floor", "grid_position": [0, 4, 0], "slots": [3, 2, 2], "orientation": "axis_x", "z_index": 410},
+    "desk_slot": {"surface": "floor", "grid_position": [4, 1, 0], "slots": [3, 2, 2], "orientation": "axis_x", "z_index": 420},
+    "lamp_slot": {"surface": "floor", "grid_position": [6, 4, 0], "slots": [1, 1, 2], "orientation": "upright", "z_index": 430}
+  }
+}

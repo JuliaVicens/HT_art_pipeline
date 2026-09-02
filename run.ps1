@@ -3,7 +3,8 @@ param(
     [string]$Source,
     [int[]]$Slots,
     [int]$Height = -1,
-    [double]$ObjectScale = 0.8
+    [double]$ObjectScale = 0.8,
+    [switch]$RoomLab
 )
 
 $ErrorActionPreference = "Stop"
@@ -12,6 +13,14 @@ $Root = Split-Path -Parent $MyInvocation.MyCommand.Path
 if (-not (Test-Path "$Root\.venv\Scripts\python.exe")) {
     py -3 -m venv "$Root\.venv"
     & "$Root\.venv\Scripts\python.exe" -m pip install -r "$Root\requirements.txt"
+}
+
+if ($RoomLab) {
+    if ($Source -or $Slots -or $Height -ge 0 -or $PSBoundParameters.ContainsKey("ObjectScale")) {
+        throw "-RoomLab cannot be combined with asset build parameters"
+    }
+    & "$Root\.venv\Scripts\python.exe" "$Root\scripts\build_room_lab.py" --root $Root
+    exit $LASTEXITCODE
 }
 
 if ($Source) {
