@@ -48,6 +48,39 @@ def iso(layout: dict, x: float, y: float, z: float = 0) -> tuple[int, int]:
             round(origin_y + (x + y) * tile_height / 2 - z * grid["elevation_step"]))
 
 
+def slot_anchor(layout: dict, slot: dict) -> tuple[int, int]:
+    """Derive an object's room anchor solely from its declared surface and slot."""
+    if slot["surface"] == "floor":
+        x, y, _ = slot["grid_position"]
+        width, depth, _ = slot["slots"]
+        return iso(layout, x + width / 2, y + depth / 2)
+    along, elevation = slot["wall_position"]
+    width, _, _ = slot["slots"]
+    if slot["surface"] == "left_wall" and slot["orientation"] == "wall_left":
+        lower_a = iso(layout, 0, along, elevation)
+        lower_b = iso(layout, 0, along + width, elevation)
+    elif slot["surface"] == "right_wall" and slot["orientation"] == "wall_right":
+        lower_a = iso(layout, along, 0, elevation)
+        lower_b = iso(layout, along + width, 0, elevation)
+    else:
+        raise ValueError(f"Surface/orientation mismatch: {slot['surface']} / {slot.get('orientation')}")
+    return ((lower_a[0] + lower_b[0]) // 2, (lower_a[1] + lower_b[1]) // 2)
+
+
+def wall_slot_points(layout: dict, slot: dict) -> list[tuple[int, int]]:
+    along, elevation = slot["wall_position"]
+    width, _, height = slot["slots"]
+    if slot["surface"] == "left_wall":
+        lower_a, lower_b = iso(layout, 0, along, elevation), iso(layout, 0, along + width, elevation)
+        upper_b, upper_a = iso(layout, 0, along + width, elevation + height), iso(layout, 0, along, elevation + height)
+    elif slot["surface"] == "right_wall":
+        lower_a, lower_b = iso(layout, along, 0, elevation), iso(layout, along + width, 0, elevation)
+        upper_b, upper_a = iso(layout, along + width, 0, elevation + height), iso(layout, along, 0, elevation + height)
+    else:
+        raise ValueError("wall_slot_points requires a wall surface")
+    return [lower_a, lower_b, upper_b, upper_a]
+
+
 def draw_walls(size: tuple[int, int], palette: dict[str, str], layout: dict) -> Image.Image:
     image = Image.new("RGBA", size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(image)
@@ -151,6 +184,7 @@ def main() -> None:
     previews.mkdir(parents=True, exist_ok=True)
 
     layers = {}
+    furnished_rooms = {}
     panels = []
     room_manifest_path = room / "room_assets_manifest.json"
     room_manifest = (json.loads(room_manifest_path.read_text(encoding="utf-8"))
@@ -182,13 +216,13 @@ def main() -> None:
             asset = room_assets.get(declaration["name"], {})
             offset = asset.get("placement_offset") or {"x": 0, "y": 0}
             slot = layout["slots"][declaration["slot"]]
-            x, y, _ = slot["grid_position"]
-            width, depth, _ = slot["slots"]
-            anchor = iso(layout, x + width / 2, y + depth / 2)
+            anchor = slot_anchor(layout, slot)
             anchor = (anchor[0] + int(offset["x"]), anchor[1] + int(offset["y"]))
-            furnished.alpha_composite(sprite, (anchor[0] - sprite.width // 2,
-                                                anchor[1] - sprite.height))
+            local_anchor = asset.get("anchor") or [sprite.width // 2, sprite.height]
+            furnished.alpha_composite(sprite, (anchor[0] - int(local_anchor[0]),
+                                                anchor[1] - int(local_anchor[1])))
         furnished.save(previews / f"room_{theme}_furnished.png", optimize=True)
+        furnished_rooms[theme] = furnished
 
     reference_wall_alpha = layers["pastel"][0].getchannel("A").tobytes()
     reference_floor_alpha = layers["pastel"][1].getchannel("A").tobytes()
@@ -276,6 +310,30 @@ def main() -> None:
                        fill=(20, 20, 24, 255), font=ImageFont.load_default())
     slot_qa.alpha_composite(overlay)
     slot_qa.save(previews / "room_slots_qa.png", optimize=True)
+
+    # Dedicated wall-asset QA: composed result plus exact slot boundary and
+    # layout-derived anchor for every theme. This verifies wall placement
+    # without treating the asset as a floor footprint.
+    for qa_slot_name in ("window_slot", "corkboard_slot"):
+        qa_slot = layout["slots"][qa_slot_name]
+        wall_points = wall_slot_points(layout, qa_slot)
+        wall_anchor = slot_anchor(layout, qa_slot)
+        qa_panels = []
+        for theme in THEMES:
+            panel = furnished_rooms[theme].copy()
+            qa_draw = ImageDraw.Draw(panel)
+            qa_draw.line(wall_points + [wall_points[0]], fill=(20, 230, 210, 255), width=2)
+            qa_draw.line((wall_anchor[0] - 6, wall_anchor[1], wall_anchor[0] + 6, wall_anchor[1]),
+                         fill=(255, 255, 255, 255), width=2)
+            qa_draw.line((wall_anchor[0], wall_anchor[1] - 6, wall_anchor[0], wall_anchor[1] + 6),
+                         fill=(255, 255, 255, 255), width=2)
+            qa_draw.text((12, 12), f"{theme.upper()}  {qa_slot_name} / {qa_slot['orientation']} / anchor",
+                         fill=(20, 20, 24, 255), font=ImageFont.load_default())
+            qa_panels.append(panel.resize((size[0] // 2, size[1] // 2), Image.Resampling.NEAREST))
+        wall_sheet = Image.new("RGBA", (size[0] // 2 * 3, size[1] // 2), (22, 24, 29, 255))
+        for index, panel in enumerate(qa_panels):
+            wall_sheet.alpha_composite(panel, (index * size[0] // 2, 0))
+        wall_sheet.save(previews / f"{qa_slot_name.removesuffix('_slot')}_qa.png", optimize=True)
     print(f"OK: room lab built at {room}")
 
 

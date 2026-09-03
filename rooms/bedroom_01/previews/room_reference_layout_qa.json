@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "proposal": "room_reference_layout.proposal.json",
+  "objects": 20,
+  "individual_modular_objects": 20,
+  "room_bounds": {
+    "projection": "isometric_2_to_1",
+    "tile_size": [
+      64,
+      32
+    ],
+    "floor_cells": [
+      8,
+      8
+    ],
+    "wall_height_cells": 6,
+    "allowed_surfaces": [
+      "floor",
+      "left_wall",
+      "right_wall"
+    ],
+    "containment": "strict_slot",
+    "concept_image_is_authoritative": false,
+    "room_layout_is_authoritative": true
+  },
+  "existing": 0,
+  "planned": 0,
+  "suggested": 20,
+  "density": {
+    "near_wall_floor_coverage": 0.8667,
+    "floor_coverage": 0.8125,
+    "wall_coverage": 0.25,
+    "walkway_connected": true,
+    "walkable_cells": 27
+  },
+  "errors": [],
+  "status": "pass"
+}

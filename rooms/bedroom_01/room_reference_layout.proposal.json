@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "status": "proposal",
+  "room": "bedroom_01",
+  "art_reference": "previews/room_free_proposal_01.png",
+  "brief": "Layout canónico inspirado en el inventario, composición y densidad de la referencia artística aprobada.",
+  "themes": ["pastel"],
+  "visualization": "object_colors",
+  "room_contract": {
+    "projection": "isometric_2_to_1",
+    "tile_size": [64, 32],
+    "floor_cells": [8, 8],
+    "wall_height_cells": 6,
+    "allowed_surfaces": ["floor", "left_wall", "right_wall"],
+    "containment": "strict_slot",
+    "concept_image_is_authoritative": false,
+    "room_layout_is_authoritative": true
+  },
+  "density_policy": {
+    "reference": "room_free_proposal_01.png",
+    "profile": "cozy_full",
+    "near_wall_floor_target": 0.60,
+    "minimum_floor_coverage": 0.65,
+    "minimum_wall_coverage": 0.25,
+    "wall_elevation_range": [1, 6],
+    "minimum_walkway_width": 1,
+    "require_continuous_walkway": true
+  },
+  "asset_contract": {
+    "kind": "modular_object",
+    "objects_array_contains_only_individual_objects": true,
+    "generation_unit": "individual",
+    "transparent_background": true,
+    "position_owned_by_layout": true,
+    "allow_baked_room_position": false,
+    "allow_surrounding_wall_or_floor": false,
+    "allow_unlisted_companion_objects": false,
+    "minimum_detail_level": "rich_but_pixel_readable"
+  },
+  "objects": [
+    {"id":"rug","slot":"reference_rug","asset_status":"suggested","surface":"floor","grid_position":[2,3,0],"slots":[6,4,0],"orientation":"axis_x","z_index":205,"collision_group":"floor_covering"},
+    {"id":"window","slot":"reference_window","asset_status":"suggested","surface":"left_wall","wall_position":[4,1],"slots":[3,1,3],"orientation":"wall_left","z_index":310},
+    {"id":"curtains","slot":"reference_curtains","asset_status":"suggested","surface":"left_wall","wall_position":[4,1],"slots":[3,1,3],"orientation":"wall_left","z_index":315,"collision_group":"wall_accessory"},
+    {"id":"framed_art","slot":"reference_framed_art","asset_status":"suggested","surface":"left_wall","wall_position":[1,4],"slots":[1,1,1],"orientation":"wall_left","z_index":320},
+    {"id":"hanging_plant","slot":"reference_hanging_plant","asset_status":"suggested","surface":"left_wall","wall_position":[3,3],"slots":[1,1,2],"orientation":"wall_left","z_index":325},
+    {"id":"wall_textile","slot":"reference_wall_textile","asset_status":"suggested","surface":"right_wall","wall_position":[0,3],"slots":[1,1,2],"orientation":"wall_right","z_index":330},
+    {"id":"wall_shelf","slot":"reference_wall_shelf","asset_status":"suggested","surface":"right_wall","wall_position":[4,4],"slots":[3,1,1],"orientation":"wall_right","z_index":335},
+    {"id":"corkboard","slot":"reference_corkboard","asset_status":"suggested","surface":"right_wall","wall_position":[6,2],"slots":[1,1,2],"orientation":"wall_right","z_index":340},
+    {"id":"wall_clock","slot":"reference_wall_clock","asset_status":"suggested","surface":"right_wall","wall_position":[7,3],"slots":[1,1,1],"orientation":"wall_right","z_index":345},
+    {"id":"wardrobe","slot":"reference_wardrobe","asset_status":"suggested","surface":"floor","grid_position":[3,0,0],"slots":[3,2,3],"orientation":"axis_x","z_index":400},
+    {"id":"dresser","slot":"reference_dresser","asset_status":"suggested","surface":"floor","grid_position":[6,0,0],"slots":[2,2,2],"orientation":"axis_x","z_index":405},
+    {"id":"bed","slot":"reference_bed","asset_status":"suggested","surface":"floor","grid_position":[0,0,0],"slots":[3,3,2],"orientation":"axis_y","z_index":410},
+    {"id":"bedside_bookcase","slot":"reference_bedside_bookcase","asset_status":"suggested","surface":"floor","grid_position":[0,3,0],"slots":[2,1,2],"orientation":"axis_y","z_index":415},
+    {"id":"nightstand","slot":"reference_nightstand","asset_status":"suggested","surface":"floor","grid_position":[3,2,0],"slots":[1,1,2],"orientation":"upright","z_index":420},
+    {"id":"desk","slot":"reference_desk","asset_status":"suggested","surface":"floor","grid_position":[0,4,0],"slots":[2,2,2],"orientation":"axis_y","z_index":425},
+    {"id":"desk_chair","slot":"reference_desk_chair","asset_status":"suggested","surface":"floor","grid_position":[2,5,0],"slots":[1,1,2],"orientation":"faces_axis_y_negative","z_index":430},
+    {"id":"floor_lamp","slot":"reference_floor_lamp","asset_status":"suggested","surface":"floor","grid_position":[6,2,0],"slots":[1,1,2],"orientation":"upright","z_index":435},
+    {"id":"coffee_table","slot":"reference_coffee_table","asset_status":"suggested","surface":"floor","grid_position":[3,4,0],"slots":[2,2,1],"orientation":"axis_x","z_index":440},
+    {"id":"reading_chair","slot":"reference_reading_chair","asset_status":"suggested","surface":"floor","grid_position":[6,4,0],"slots":[2,2,2],"orientation":"faces_axis_y_negative","z_index":445},
+    {"id":"front_plant","slot":"reference_front_plant","asset_status":"suggested","surface":"floor","grid_position":[7,7,0],"slots":[1,1,2],"orientation":"upright","z_index":450}
+  ]
+}

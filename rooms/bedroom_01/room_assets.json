@@ -1,6 +1,12 @@
 {
   "schema_version": 1,
   "assets": [
+    {"slot":"window_slot","theme":"pastel","name":"window_pastel_01","slots":[2,1,2],"object_scale":1.0},
+    {"slot":"window_slot","theme":"modern","name":"window_modern_01","slots":[2,1,2],"object_scale":1.0},
+    {"slot":"window_slot","theme":"gamer","name":"window_gamer_01","slots":[2,1,2],"object_scale":1.0},
+    {"slot":"corkboard_slot","theme":"pastel","name":"corkboard_pastel_01","slots":[2,1,2],"object_scale":1.0},
+    {"slot":"corkboard_slot","theme":"modern","name":"corkboard_modern_01","slots":[2,1,2],"object_scale":1.0},
+    {"slot":"corkboard_slot","theme":"gamer","name":"corkboard_gamer_01","slots":[2,1,2],"object_scale":1.0},
     {"slot":"bed_slot","theme":"pastel","name":"bed_pastel_01","slots":[3,2,2],"object_scale":0.8},
     {"slot":"bed_slot","theme":"modern","name":"bed_modern_01","slots":[3,2,2],"object_scale":0.8},
     {"slot":"bed_slot","theme":"gamer","name":"bed_gamer_01","slots":[3,2,2],"object_scale":0.8},

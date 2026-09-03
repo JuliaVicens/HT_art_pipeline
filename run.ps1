@@ -4,7 +4,8 @@ param(
     [int[]]$Slots,
     [int]$Height = -1,
     [double]$ObjectScale = 0.8,
-    [switch]$RoomLab
+    [switch]$RoomLab,
+    [string]$DesignRoom
 )
 
 $ErrorActionPreference = "Stop"
@@ -22,6 +23,14 @@ if ($RoomLab) {
     & "$Root\.venv\Scripts\python.exe" "$Root\scripts\build_room_assets.py" --root $Root
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
     & "$Root\.venv\Scripts\python.exe" "$Root\scripts\build_room_lab.py" --root $Root
+    exit $LASTEXITCODE
+}
+
+if ($DesignRoom) {
+    if ($Source -or $Slots -or $Height -ge 0 -or $PSBoundParameters.ContainsKey("ObjectScale") -or $RoomLab) {
+        throw "-DesignRoom cannot be combined with asset build parameters"
+    }
+    & "$Root\.venv\Scripts\python.exe" "$Root\scripts\build_room_proposal.py" --root $Root --room $DesignRoom
     exit $LASTEXITCODE
 }
 

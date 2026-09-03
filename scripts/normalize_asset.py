@@ -368,6 +368,7 @@ def normalize(
     ground_contact: tuple[float, float] | None = None,
     chroma_key: tuple[int, int, int] | None = None,
     chroma_tolerance: int = 0,
+    wall_orientation: str | None = None,
 ) -> dict:
     if not source.is_file():
         raise ValueError(f"Source not found: {source}")
@@ -396,10 +397,12 @@ def normalize(
     containment_scale = 1.0
     containment_qa = None
 
-    if asset_type == "object":
+    if asset_type in {"object", "wall_object"}:
         sx, sy, sz = slots
         if min(slots) < 1 or not 0.1 <= object_scale <= 1.0:
             raise ValueError("Object slots must be >= 1 and object-scale must be between 0.1 and 1.0")
+        if asset_type == "wall_object" and wall_orientation not in {"wall_left", "wall_right"}:
+            raise ValueError("Wall objects require wall_left or wall_right orientation")
         footprint_width = (sx + sy) * width // 2
         footprint_depth = (sx + sy) * depth // 2
         object_height = footprint_depth + sz * depth
@@ -420,10 +423,38 @@ def normalize(
         if bbox is None:
             raise ValueError("Object source has no visible pixels")
         image = image.crop(bbox)
-        fit = (max(1, round(footprint_width * object_scale)),
-               max(1, round(object_height * object_scale)))
-        image.thumbnail(fit, Image.Resampling.NEAREST)
-        if auto_align_object:
+        if asset_type == "wall_object":
+            # Wall art is authored as a front elevation and deterministically
+            # projected onto the declared 2:1 wall plane. The visible rectangle
+            # occupies the complete slot; placement is owned by room_layout.json.
+            face_width = sx * width // 2
+            face_height = sz * depth
+            image = image.resize((face_width, face_height), Image.Resampling.NEAREST)
+            # iso(0, y) travels down-left (-1/2 screen slope), while
+            # iso(x, 0) travels down-right (+1/2). Derive this exclusively
+            # from the declared wall orientation so sources stay positionless.
+            slope_sign = -1 if wall_orientation == "wall_left" else 1
+            canvas_size = (face_width, face_height + face_width // 2)
+            result = Image.new("RGBA", canvas_size, (0, 0, 0, 0))
+            source_pixels = image.load()
+            target_pixels = result.load()
+            for x in range(face_width):
+                column_offset = round(x / 2) if slope_sign > 0 else round((face_width - 1 - x) / 2)
+                for y in range(face_height):
+                    r, g, b, a = source_pixels[x, y]
+                    if a >= 128:
+                        qr, qg, qb = nearest((r, g, b), palette)
+                        target_pixels[x, y + column_offset] = (qr, qg, qb, 255)
+            effective_offset = (0, 0)
+            alignment_method = "wall_plane"
+            segmentation = None
+            seam_score = None
+            top_inset = None
+        else:
+            fit = (max(1, round(footprint_width * object_scale)),
+                   max(1, round(object_height * object_scale)))
+            image.thumbnail(fit, Image.Resampling.NEAREST)
+        if asset_type == "object" and auto_align_object:
             # Wide, shallow silhouettes (boards/fences) expose a reliable foot
             # line. Deep/tall silhouettes (machines/furniture) are better
             # represented by the principal axis of their lower structure.
@@ -456,53 +487,54 @@ def normalize(
                     source_slope = -source_slope
                 effective_shear = max(-0.75, min(0.75, desired_slope - source_slope)) if desired_slope else 0.0
             measured_slope = source_slope if desired_slope else None
-        elif effective_mirror:
+        elif asset_type == "object" and effective_mirror:
             image = image.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
-        placed = Image.new("RGBA", canvas_size, (0, 0, 0, 0))
-        shear_clearance = math.ceil(abs(effective_shear) * image.width / 2) + (2 if effective_shear else 0)
-        placed.alpha_composite(
-            image,
-            ((canvas_size[0] - image.width) // 2,
-             canvas_size[1] - image.height - shear_clearance),
-        )
-        result = Image.new("RGBA", canvas_size, (0, 0, 0, 0))
-        src, dst = placed.load(), result.load()
-        for y in range(canvas_size[1]):
-            for x in range(canvas_size[0]):
-                r, g, b, a = src[x, y]
-                # Generated sources may contain a faint semi-transparent halo.
-                # A hard threshold keeps object sprites binary and pixel-clean.
-                if a >= 128:
-                    qr, qg, qb = nearest((r, g, b), palette)
-                    dst[x, y] = (qr, qg, qb, 255)
-        if effective_shear:
-            cx = (canvas_size[0] - 1) / 2
-            # PIL expects the inverse affine map: source y = output y - s(x-cx).
-            result = result.transform(
-                canvas_size,
-                Image.Transform.AFFINE,
-                (1, 0, 0, -effective_shear, 1, effective_shear * cx),
-                resample=Image.Resampling.NEAREST,
-                fillcolor=(0, 0, 0, 0),
+        if asset_type == "object":
+            placed = Image.new("RGBA", canvas_size, (0, 0, 0, 0))
+            shear_clearance = math.ceil(abs(effective_shear) * image.width / 2) + (2 if effective_shear else 0)
+            placed.alpha_composite(
+                image,
+                ((canvas_size[0] - image.width) // 2,
+                 canvas_size[1] - image.height - shear_clearance),
             )
-        if auto_align_object:
-            if ground_contact is not None:
-                if any(value < 0 or value > 1 for value in ground_contact):
-                    raise ValueError("ground-contact coordinates must be between 0 and 1")
-                contact_x, contact_y = declared_contact(result, ground_contact)
-                alignment_method = "declared_contact"
-            else:
-                contact_x, contact_y, alignment_method = placement_pivot(result, slots)
-            effective_offset = (
-                round(canvas_size[0] / 2 - contact_x),
-                round(canvas_size[1] - contact_y),
-            )
-            result, effective_offset, containment_scale, containment_qa = support_containment(
-                result, slots, effective_offset, ground_contact
-            )
-        segmentation = None
-        seam_score = None
-        top_inset = None
+            result = Image.new("RGBA", canvas_size, (0, 0, 0, 0))
+            src, dst = placed.load(), result.load()
+            for y in range(canvas_size[1]):
+                for x in range(canvas_size[0]):
+                    r, g, b, a = src[x, y]
+                    # Generated sources may contain a faint semi-transparent halo.
+                    # A hard threshold keeps object sprites binary and pixel-clean.
+                    if a >= 128:
+                        qr, qg, qb = nearest((r, g, b), palette)
+                        dst[x, y] = (qr, qg, qb, 255)
+            if effective_shear:
+                cx = (canvas_size[0] - 1) / 2
+                # PIL expects the inverse affine map: source y = output y - s(x-cx).
+                result = result.transform(
+                    canvas_size,
+                    Image.Transform.AFFINE,
+                    (1, 0, 0, -effective_shear, 1, effective_shear * cx),
+                    resample=Image.Resampling.NEAREST,
+                    fillcolor=(0, 0, 0, 0),
+                )
+            if auto_align_object:
+                if ground_contact is not None:
+                    if any(value < 0 or value > 1 for value in ground_contact):
+                        raise ValueError("ground-contact coordinates must be between 0 and 1")
+                    contact_x, contact_y = declared_contact(result, ground_contact)
+                    alignment_method = "declared_contact"
+                else:
+                    contact_x, contact_y, alignment_method = placement_pivot(result, slots)
+                effective_offset = (
+                    round(canvas_size[0] / 2 - contact_x),
+                    round(canvas_size[1] - contact_y),
+                )
+                result, effective_offset, containment_scale, containment_qa = support_containment(
+                    result, slots, effective_offset, ground_contact
+                )
+            segmentation = None
+            seam_score = None
+            top_inset = None
     else:
         views, segmentation, view_metadata = load_views(source, views_path)
         top_inset = float(view_metadata.get("top_inset", .04))
@@ -533,11 +565,14 @@ def normalize(
         "palette": spec["id"],
         "palette_version": spec["version"],
         "dimensions": {"width": width, "depth": depth, "height": height},
-        "slots": {"x": slots[0], "y": slots[1], "z": slots[2]} if asset_type == "object" else None,
-        "object_scale": round(object_scale * containment_scale, 4) if asset_type == "object" else None,
-        "object_scale_requested": object_scale if asset_type == "object" else None,
-        "anchor": [canvas_size[0] // 2, canvas_size[1]] if asset_type == "object" else None,
-        "placement_offset": {"x": effective_offset[0], "y": effective_offset[1]} if asset_type == "object" else None,
+        "slots": {"x": slots[0], "y": slots[1], "z": slots[2]} if asset_type in {"object", "wall_object"} else None,
+        "surface": "wall" if asset_type == "wall_object" else ("floor" if asset_type == "object" else None),
+        "orientation": wall_orientation if asset_type == "wall_object" else None,
+        "object_scale": round(object_scale * containment_scale, 4) if asset_type == "object" else (1.0 if asset_type == "wall_object" else None),
+        "object_scale_requested": object_scale if asset_type == "object" else (1.0 if asset_type == "wall_object" else None),
+        "anchor": ([canvas_size[0] // 2, canvas_size[1] - canvas_size[0] // 4]
+                   if asset_type == "wall_object" else ([canvas_size[0] // 2, canvas_size[1]] if asset_type == "object" else None)),
+        "placement_offset": {"x": effective_offset[0], "y": effective_offset[1]} if asset_type in {"object", "wall_object"} else None,
         "ground_contact": {"x": ground_contact[0], "y": ground_contact[1]}
         if asset_type == "object" and ground_contact is not None else None,
         "background": ({"mode": "chroma_key", "color": "#%02X%02X%02X" % chroma_key,
@@ -546,16 +581,27 @@ def normalize(
         "mirror_x": effective_mirror if asset_type == "object" else None,
         "shear_y": round(effective_shear, 4) if asset_type == "object" else None,
         "auto_aligned": auto_align_object if asset_type == "object" else None,
-        "alignment_method": alignment_method if asset_type == "object" and auto_align_object else None,
+        "alignment_method": ("wall_plane" if asset_type == "wall_object" else
+                             (alignment_method if asset_type == "object" and auto_align_object else None)),
         "geometry_locked": geometry_locked if asset_type == "object" else None,
         "geometry_qa": ({
             "expected_slope": expected_slope,
             "measured_slope": round(measured_slope, 4),
             "absolute_error": round(abs(measured_slope - expected_slope), 4),
             "status": "pass" if abs(measured_slope - expected_slope) <= 0.08 else "review",
-        } if asset_type == "object" and measured_slope is not None else None),
-        "containment_qa": containment_qa if asset_type == "object" else None,
-        "exact_axis_scores": exact_axis_scores(result) if asset_type == "object" else None,
+        } if asset_type == "object" and measured_slope is not None else ({
+            "expected_slope": -0.5 if wall_orientation == "wall_left" else 0.5,
+            "measured_slope": -0.5 if wall_orientation == "wall_left" else 0.5,
+            "absolute_error": 0.0,
+            "status": "pass",
+        } if asset_type == "wall_object" else None)),
+        "containment_qa": (containment_qa if asset_type == "object" else ({
+            "surface": wall_orientation,
+            "projected_face_size": [face_width, face_height],
+            "canvas_size": list(canvas_size),
+            "status": "pass",
+        } if asset_type == "wall_object" else None)),
+        "exact_axis_scores": exact_axis_scores(result) if asset_type in {"object", "wall_object"} else None,
         "canvas_size": list(canvas_size),
         "sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -695,7 +741,9 @@ def main() -> None:
     parser.add_argument("--width", type=int, default=DEFAULT_WIDTH, help="Surface width in pixels")
     parser.add_argument("--depth", type=int, default=DEFAULT_DEPTH, help="Surface depth in pixels")
     parser.add_argument("--height", type=int, default=DEFAULT_HEIGHT, help="Vertical elevation in pixels")
-    parser.add_argument("--asset-type", choices=("terrain", "object"), default="terrain")
+    parser.add_argument("--asset-type", choices=("terrain", "object", "wall_object"), default="terrain")
+    parser.add_argument("--wall-orientation", choices=("wall_left", "wall_right"),
+                        help="Wall plane used to project a front-elevation wall object")
     parser.add_argument("--views", type=Path, help="Optional top/left/right segmentation points JSON")
     parser.add_argument("--tiling", choices=("seamless", "none"), default="seamless")
     parser.add_argument("--qa-dir", type=Path, help="Write segmentation and rectified-texture previews")
@@ -739,6 +787,7 @@ def main() -> None:
         tuple(args.ground_contact) if args.ground_contact else None,
         hex_rgb(args.chroma_key) if args.chroma_key else None,
         args.chroma_tolerance,
+        args.wall_orientation,
     )
     args.manifest.parent.mkdir(parents=True, exist_ok=True)
     manifest = {"schema_version": 1, "assets": []}

@@ -25,6 +25,8 @@
         "y": 2,
         "z": 2
       },
+      "surface": "floor",
+      "orientation": null,
       "object_scale": 0.8,
       "object_scale_requested": 0.8,
       "anchor": [
@@ -66,7 +68,7 @@
         176
       ],
       "sha256": "adf96ec491586c8851f5ddc458062569aa3123cb0a1384fc2b22a472376e5f54",
-      "generated_at": "2026-09-02T20:16:49.541775+00:00"
+      "generated_at": "2026-09-02T20:55:17.313325+00:00"
     },
     {
       "asset": "bed_modern_01",
@@ -92,6 +94,8 @@
         "y": 2,
         "z": 2
       },
+      "surface": "floor",
+      "orientation": null,
       "object_scale": 0.8,
       "object_scale_requested": 0.8,
       "anchor": [
@@ -133,7 +137,7 @@
         176
       ],
       "sha256": "9d0452d31d4ef98368392163e86b8b57e6ecaac31f1393b17829b1fa5d9f7c03",
-      "generated_at": "2026-09-02T20:16:44.923745+00:00"
+      "generated_at": "2026-09-02T20:55:12.605787+00:00"
     },
     {
       "asset": "bed_pastel_01",
@@ -159,6 +163,8 @@
         "y": 2,
         "z": 2
       },
+      "surface": "floor",
+      "orientation": null,
       "object_scale": 0.8,
       "object_scale_requested": 0.8,
       "anchor": [
@@ -200,7 +206,7 @@
         176
       ],
       "sha256": "5e5dbb63c313fe241f4502df15b8b9d1bfc835997673a24e4596db7b6c335ecd",
-      "generated_at": "2026-09-02T20:16:39.911128+00:00"
+      "generated_at": "2026-09-02T20:55:07.679580+00:00"
     },
     {
       "asset": "chair_gamer_01",
@@ -226,6 +232,8 @@
         "y": 1,
         "z": 2
       },
+      "surface": "floor",
+      "orientation": null,
       "object_scale": 0.72,
       "object_scale_requested": 0.72,
       "anchor": [
@@ -262,7 +270,7 @@
         128
       ],
       "sha256": "28d3dcd9ea9990badf164de4c1129cc59fdd05b9b033241821e44e13d3147169",
-      "generated_at": "2026-09-02T20:17:10.200552+00:00"
+      "generated_at": "2026-09-02T20:55:38.941795+00:00"
     },
     {
       "asset": "chair_modern_01",
@@ -288,6 +296,8 @@
         "y": 1,
         "z": 2
       },
+      "surface": "floor",
+      "orientation": null,
       "object_scale": 0.72,
       "object_scale_requested": 0.72,
       "anchor": [
@@ -324,7 +334,7 @@
         128
       ],
       "sha256": "d0968ef9a94392a1fc0ae9dee4dbfb5525d6acde795b7aff5145bab19031e813",
-      "generated_at": "2026-09-02T20:17:07.119136+00:00"
+      "generated_at": "2026-09-02T20:55:35.967945+00:00"
     },
     {
       "asset": "chair_pastel_01",
@@ -350,6 +360,8 @@
         "y": 1,
         "z": 2
       },
+      "surface": "floor",
+      "orientation": null,
       "object_scale": 0.72,
       "object_scale_requested": 0.72,
       "anchor": [
@@ -386,7 +398,226 @@
         128
       ],
       "sha256": "10f00d05c8e4fb0af96b83d9f79c5e7465028e7a6c47773c3103e663149141ac",
-      "generated_at": "2026-09-02T20:17:04.251085+00:00"
+      "generated_at": "2026-09-02T20:55:33.019663+00:00"
+    },
+    {
+      "asset": "corkboard_gamer_01",
+      "asset_type": "wall_object",
+      "segmentation": null,
+      "top_inset": null,
+      "tiling": "none",
+      "projection": "silhouette",
+      "side_mode": "none",
+      "edge_blend": 0,
+      "seam_score": null,
+      "source": "C:/Users/julia/DesktopLocal/HT/art_pipeline/rooms/bedroom_01/sources/corkboard_gamer_01.source.png",
+      "output": "C:/Users/julia/DesktopLocal/HT/art_pipeline/rooms/bedroom_01/assets/furniture/corkboard_gamer_01.png",
+      "palette": "bedroom_gamer",
+      "palette_version": 1,
+      "dimensions": {
+        "width": 64,
+        "depth": 32,
+        "height": 8
+      },
+      "slots": {
+        "x": 2,
+        "y": 1,
+        "z": 2
+      },
+      "surface": "wall",
+      "orientation": "wall_right",
+      "object_scale": 1.0,
+      "object_scale_requested": 1.0,
+      "anchor": [
+        32,
+        80
+      ],
+      "placement_offset": {
+        "x": 0,
+        "y": 0
+      },
+      "ground_contact": null,
+      "background": null,
+      "mirror_x": null,
+      "shear_y": null,
+      "auto_aligned": null,
+      "alignment_method": "wall_plane",
+      "geometry_locked": null,
+      "geometry_qa": {
+        "expected_slope": 0.5,
+        "measured_slope": 0.5,
+        "absolute_error": 0.0,
+        "status": "pass"
+      },
+      "containment_qa": {
+        "surface": "wall_right",
+        "projected_face_size": [
+          64,
+          64
+        ],
+        "canvas_size": [
+          64,
+          96
+        ],
+        "status": "pass"
+      },
+      "exact_axis_scores": {
+        "axis_positive_half": 0.508,
+        "axis_negative_half": 0.08,
+        "vertical": 0.504
+      },
+      "canvas_size": [
+        64,
+        96
+      ],
+      "sha256": "401a386ca12303b9d0a4ce78eeefa4cad9a643f70d9701f97a2b058a3f5e54f2",
+      "generated_at": "2026-09-02T20:55:02.789093+00:00"
+    },
+    {
+      "asset": "corkboard_modern_01",
+      "asset_type": "wall_object",
+      "segmentation": null,
+      "top_inset": null,
+      "tiling": "none",
+      "projection": "silhouette",
+      "side_mode": "none",
+      "edge_blend": 0,
+      "seam_score": null,
+      "source": "C:/Users/julia/DesktopLocal/HT/art_pipeline/rooms/bedroom_01/sources/corkboard_modern_01.source.png",
+      "output": "C:/Users/julia/DesktopLocal/HT/art_pipeline/rooms/bedroom_01/assets/furniture/corkboard_modern_01.png",
+      "palette": "bedroom_modern",
+      "palette_version": 1,
+      "dimensions": {
+        "width": 64,
+        "depth": 32,
+        "height": 8
+      },
+      "slots": {
+        "x": 2,
+        "y": 1,
+        "z": 2
+      },
+      "surface": "wall",
+      "orientation": "wall_right",
+      "object_scale": 1.0,
+      "object_scale_requested": 1.0,
+      "anchor": [
+        32,
+        80
+      ],
+      "placement_offset": {
+        "x": 0,
+        "y": 0
+      },
+      "ground_contact": null,
+      "background": null,
+      "mirror_x": null,
+      "shear_y": null,
+      "auto_aligned": null,
+      "alignment_method": "wall_plane",
+      "geometry_locked": null,
+      "geometry_qa": {
+        "expected_slope": 0.5,
+        "measured_slope": 0.5,
+        "absolute_error": 0.0,
+        "status": "pass"
+      },
+      "containment_qa": {
+        "surface": "wall_right",
+        "projected_face_size": [
+          64,
+          64
+        ],
+        "canvas_size": [
+          64,
+          96
+        ],
+        "status": "pass"
+      },
+      "exact_axis_scores": {
+        "axis_positive_half": 0.508,
+        "axis_negative_half": 0.08,
+        "vertical": 0.504
+      },
+      "canvas_size": [
+        64,
+        96
+      ],
+      "sha256": "337e088f95639f00f39fa6e9cbb4513a1c4049f8c72861187e424089e04d8081",
+      "generated_at": "2026-09-02T20:55:01.167368+00:00"
+    },
+    {
+      "asset": "corkboard_pastel_01",
+      "asset_type": "wall_object",
+      "segmentation": null,
+      "top_inset": null,
+      "tiling": "none",
+      "projection": "silhouette",
+      "side_mode": "none",
+      "edge_blend": 0,
+      "seam_score": null,
+      "source": "C:/Users/julia/DesktopLocal/HT/art_pipeline/rooms/bedroom_01/sources/corkboard_pastel_01.source.png",
+      "output": "C:/Users/julia/DesktopLocal/HT/art_pipeline/rooms/bedroom_01/assets/furniture/corkboard_pastel_01.png",
+      "palette": "bedroom_pastel",
+      "palette_version": 1,
+      "dimensions": {
+        "width": 64,
+        "depth": 32,
+        "height": 8
+      },
+      "slots": {
+        "x": 2,
+        "y": 1,
+        "z": 2
+      },
+      "surface": "wall",
+      "orientation": "wall_right",
+      "object_scale": 1.0,
+      "object_scale_requested": 1.0,
+      "anchor": [
+        32,
+        80
+      ],
+      "placement_offset": {
+        "x": 0,
+        "y": 0
+      },
+      "ground_contact": null,
+      "background": null,
+      "mirror_x": null,
+      "shear_y": null,
+      "auto_aligned": null,
+      "alignment_method": "wall_plane",
+      "geometry_locked": null,
+      "geometry_qa": {
+        "expected_slope": 0.5,
+        "measured_slope": 0.5,
+        "absolute_error": 0.0,
+        "status": "pass"
+      },
+      "containment_qa": {
+        "surface": "wall_right",
+        "projected_face_size": [
+          64,
+          64
+        ],
+        "canvas_size": [
+          64,
+          96
+        ],
+        "status": "pass"
+      },
+      "exact_axis_scores": {
+        "axis_positive_half": 0.508,
+        "axis_negative_half": 0.08,
+        "vertical": 0.504
+      },
+      "canvas_size": [
+        64,
+        96
+      ],
+      "sha256": "c494ffec290f93c794051cbff06983df29c8de32675479cb5aa2d694c7ea21c3",
+      "generated_at": "2026-09-02T20:54:59.565817+00:00"
     },
     {
       "asset": "desk_gamer_01",
@@ -412,6 +643,8 @@
         "y": 2,
         "z": 2
       },
+      "surface": "floor",
+      "orientation": null,
       "object_scale": 0.8,
       "object_scale_requested": 0.8,
       "anchor": [
@@ -453,7 +686,7 @@
         176
       ],
       "sha256": "3bd6030ff99a9769785cbbbd552257d3540bad09a8080e3f9be15767ecd91ef1",
-      "generated_at": "2026-09-02T20:17:01.375282+00:00"
+      "generated_at": "2026-09-02T20:55:29.966909+00:00"
     },
     {
       "asset": "desk_modern_01",
@@ -479,6 +712,8 @@
         "y": 2,
         "z": 2
       },
+      "surface": "floor",
+      "orientation": null,
       "object_scale": 0.8,
       "object_scale_requested": 0.8,
       "anchor": [
@@ -520,7 +755,7 @@
         176
       ],
       "sha256": "653e1b0841aa148063ab47cea588ed80b1207e79768d9683d9a63cda0bc57b11",
-      "generated_at": "2026-09-02T20:16:57.558310+00:00"
+      "generated_at": "2026-09-02T20:55:25.923031+00:00"
     },
     {
       "asset": "desk_pastel_01",
@@ -546,6 +781,8 @@
         "y": 2,
         "z": 2
       },
+      "surface": "floor",
+      "orientation": null,
       "object_scale": 0.8,
       "object_scale_requested": 0.8,
       "anchor": [
@@ -587,7 +824,226 @@
         176
       ],
       "sha256": "c32300ac7be388b1d34069850a8be4002372e32727685eaa6281b3a62905832a",
-      "generated_at": "2026-09-02T20:16:53.719010+00:00"
+      "generated_at": "2026-09-02T20:55:21.779182+00:00"
+    },
+    {
+      "asset": "window_gamer_01",
+      "asset_type": "wall_object",
+      "segmentation": null,
+      "top_inset": null,
+      "tiling": "none",
+      "projection": "silhouette",
+      "side_mode": "none",
+      "edge_blend": 0,
+      "seam_score": null,
+      "source": "C:/Users/julia/DesktopLocal/HT/art_pipeline/rooms/bedroom_01/sources/window_gamer_01.source.png",
+      "output": "C:/Users/julia/DesktopLocal/HT/art_pipeline/rooms/bedroom_01/assets/furniture/window_gamer_01.png",
+      "palette": "bedroom_gamer",
+      "palette_version": 1,
+      "dimensions": {
+        "width": 64,
+        "depth": 32,
+        "height": 8
+      },
+      "slots": {
+        "x": 2,
+        "y": 1,
+        "z": 2
+      },
+      "surface": "wall",
+      "orientation": "wall_left",
+      "object_scale": 1.0,
+      "object_scale_requested": 1.0,
+      "anchor": [
+        32,
+        80
+      ],
+      "placement_offset": {
+        "x": 0,
+        "y": 0
+      },
+      "ground_contact": null,
+      "background": null,
+      "mirror_x": null,
+      "shear_y": null,
+      "auto_aligned": null,
+      "alignment_method": "wall_plane",
+      "geometry_locked": null,
+      "geometry_qa": {
+        "expected_slope": -0.5,
+        "measured_slope": -0.5,
+        "absolute_error": 0.0,
+        "status": "pass"
+      },
+      "containment_qa": {
+        "surface": "wall_left",
+        "projected_face_size": [
+          64,
+          64
+        ],
+        "canvas_size": [
+          64,
+          96
+        ],
+        "status": "pass"
+      },
+      "exact_axis_scores": {
+        "axis_positive_half": 0.08,
+        "axis_negative_half": 0.488,
+        "vertical": 0.472
+      },
+      "canvas_size": [
+        64,
+        96
+      ],
+      "sha256": "62034d944bb28d26f52402a50be7206a935b1d5e48dbe54cbe02b9590eaaeabf",
+      "generated_at": "2026-09-02T20:54:57.939133+00:00"
+    },
+    {
+      "asset": "window_modern_01",
+      "asset_type": "wall_object",
+      "segmentation": null,
+      "top_inset": null,
+      "tiling": "none",
+      "projection": "silhouette",
+      "side_mode": "none",
+      "edge_blend": 0,
+      "seam_score": null,
+      "source": "C:/Users/julia/DesktopLocal/HT/art_pipeline/rooms/bedroom_01/sources/window_modern_01.source.png",
+      "output": "C:/Users/julia/DesktopLocal/HT/art_pipeline/rooms/bedroom_01/assets/furniture/window_modern_01.png",
+      "palette": "bedroom_modern",
+      "palette_version": 1,
+      "dimensions": {
+        "width": 64,
+        "depth": 32,
+        "height": 8
+      },
+      "slots": {
+        "x": 2,
+        "y": 1,
+        "z": 2
+      },
+      "surface": "wall",
+      "orientation": "wall_left",
+      "object_scale": 1.0,
+      "object_scale_requested": 1.0,
+      "anchor": [
+        32,
+        80
+      ],
+      "placement_offset": {
+        "x": 0,
+        "y": 0
+      },
+      "ground_contact": null,
+      "background": null,
+      "mirror_x": null,
+      "shear_y": null,
+      "auto_aligned": null,
+      "alignment_method": "wall_plane",
+      "geometry_locked": null,
+      "geometry_qa": {
+        "expected_slope": -0.5,
+        "measured_slope": -0.5,
+        "absolute_error": 0.0,
+        "status": "pass"
+      },
+      "containment_qa": {
+        "surface": "wall_left",
+        "projected_face_size": [
+          64,
+          64
+        ],
+        "canvas_size": [
+          64,
+          96
+        ],
+        "status": "pass"
+      },
+      "exact_axis_scores": {
+        "axis_positive_half": 0.08,
+        "axis_negative_half": 0.488,
+        "vertical": 0.472
+      },
+      "canvas_size": [
+        64,
+        96
+      ],
+      "sha256": "a401b699d128c7265c22c693ecafea5dc61039613dcce9f294e0ba3521a52b65",
+      "generated_at": "2026-09-02T20:54:55.755897+00:00"
+    },
+    {
+      "asset": "window_pastel_01",
+      "asset_type": "wall_object",
+      "segmentation": null,
+      "top_inset": null,
+      "tiling": "none",
+      "projection": "silhouette",
+      "side_mode": "none",
+      "edge_blend": 0,
+      "seam_score": null,
+      "source": "C:/Users/julia/DesktopLocal/HT/art_pipeline/rooms/bedroom_01/sources/window_pastel_01.source.png",
+      "output": "C:/Users/julia/DesktopLocal/HT/art_pipeline/rooms/bedroom_01/assets/furniture/window_pastel_01.png",
+      "palette": "bedroom_pastel",
+      "palette_version": 1,
+      "dimensions": {
+        "width": 64,
+        "depth": 32,
+        "height": 8
+      },
+      "slots": {
+        "x": 2,
+        "y": 1,
+        "z": 2
+      },
+      "surface": "wall",
+      "orientation": "wall_left",
+      "object_scale": 1.0,
+      "object_scale_requested": 1.0,
+      "anchor": [
+        32,
+        80
+      ],
+      "placement_offset": {
+        "x": 0,
+        "y": 0
+      },
+      "ground_contact": null,
+      "background": null,
+      "mirror_x": null,
+      "shear_y": null,
+      "auto_aligned": null,
+      "alignment_method": "wall_plane",
+      "geometry_locked": null,
+      "geometry_qa": {
+        "expected_slope": -0.5,
+        "measured_slope": -0.5,
+        "absolute_error": 0.0,
+        "status": "pass"
+      },
+      "containment_qa": {
+        "surface": "wall_left",
+        "projected_face_size": [
+          64,
+          64
+        ],
+        "canvas_size": [
+          64,
+          96
+        ],
+        "status": "pass"
+      },
+      "exact_axis_scores": {
+        "axis_positive_half": 0.08,
+        "axis_negative_half": 0.488,
+        "vertical": 0.472
+      },
+      "canvas_size": [
+        64,
+        96
+      ],
+      "sha256": "56ea44ea2ecf6a91bdfc3461933d353b918e91dfd06cd7de52432c4995d22f9a",
+      "generated_at": "2026-09-02T20:54:53.414093+00:00"
     }
   ]
 }
