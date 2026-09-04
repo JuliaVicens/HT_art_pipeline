@@ -18,7 +18,6 @@ def main() -> None:
     root = args.root.resolve()
     room = root / "rooms" / "bedroom_01"
     catalog = json.loads((room / "room_assets.json").read_text(encoding="utf-8"))
-    layout = json.loads((room / "room_layout.json").read_text(encoding="utf-8"))
     manifest = room / "room_assets_manifest.json"
     if manifest.exists():
         manifest.unlink()
@@ -28,8 +27,7 @@ def main() -> None:
         source = room / "sources" / f"{entry['name']}.source.png"
         if not source.is_file():
             raise ValueError(f"Missing room source: {source.name}")
-        slot = layout["slots"][entry["slot"]]
-        is_wall = slot["surface"] in {"left_wall", "right_wall"}
+        is_wall = entry["surface"] in {"left_wall", "right_wall"}
         command = [
             sys.executable, str(root / "scripts" / "normalize_asset.py"), str(source),
             "--palette", str(root / "palettes" / f"bedroom_{entry['theme']}.json"),
@@ -39,7 +37,7 @@ def main() -> None:
             "--object-scale", str(entry.get("object_scale", 0.8)),
         ]
         if is_wall:
-            command.extend(["--wall-orientation", slot["orientation"]])
+            command.extend(["--wall-orientation", entry["orientation"]])
         else:
             command.extend(["--auto-align-object", "--geometry-locked"])
         subprocess.run(command, check=True)

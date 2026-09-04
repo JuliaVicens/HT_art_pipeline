@@ -399,8 +399,8 @@ def normalize(
 
     if asset_type in {"object", "wall_object"}:
         sx, sy, sz = slots
-        if min(slots) < 1 or not 0.1 <= object_scale <= 1.0:
-            raise ValueError("Object slots must be >= 1 and object-scale must be between 0.1 and 1.0")
+        if sx < 1 or sy < 1 or sz < 0 or not 0.1 <= object_scale <= 1.0:
+            raise ValueError("Object X/Y slots must be >= 1, Z must be >= 0, and object-scale must be between 0.1 and 1.0")
         if asset_type == "wall_object" and wall_orientation not in {"wall_left", "wall_right"}:
             raise ValueError("Wall objects require wall_left or wall_right orientation")
         footprint_width = (sx + sy) * width // 2
@@ -461,7 +461,7 @@ def normalize(
             alignment_method = "contact_line" if image.width >= image.height else "lower_structure"
             source_slope = (contact_line(image)[0] if alignment_method == "contact_line"
                             else lower_structure_slope(image))
-            desired_slope = -0.5 if sy > sx else (0.5 if sx > sy else 0.0)
+            desired_slope = None if sz == 0 else (-0.5 if sy > sx else (0.5 if sx > sy else 0.0))
             expected_slope = desired_slope if desired_slope else None
             if geometry_locked:
                 # Geometry lock forbids shear/stretch, but a horizontal mirror
